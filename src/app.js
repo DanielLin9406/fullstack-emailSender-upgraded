@@ -1,17 +1,20 @@
 import 'dotenv/config';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import models, { connectDb } from './models';
-import routes from './routes';
 import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import models, { connectDb } from './models';
+import './services/passport';
+import routes from './routes';
+import passport from 'passport';
 
-const app = express();
 const eraseDatabaseOnSync = false;
-
-app.use(cors());
-
+const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(async (req, res, next) => {
   req.context = {
     models,
@@ -21,8 +24,9 @@ app.use(async (req, res, next) => {
 });
 
 app.use('/session', routes.session);
-app.use('/users', routes.user);
+app.use('/user', routes.user);
 app.use('/messages', routes.message);
+app.use('/auth', routes.auth);
 
 
 connectDb().then(async () => {
@@ -32,7 +36,7 @@ connectDb().then(async () => {
       models.Message.deleteMany({}),
     ]);
 
-    createUsersWithMessages();
+    // createUsersWithMessages();
   }
   app.listen(process.env.PORT, () =>
     console.log(`Example app listening on port ${process.env.PORT}!`),

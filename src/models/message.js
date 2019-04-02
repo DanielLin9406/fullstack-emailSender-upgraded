@@ -8,6 +8,5 @@ const messageSchema = new mongoose.Schema({
   // we may want to associate the message with a user
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 })
-const Message = mongoose.model('Message', messageSchema);
 
-export default Message;
+export default mongoose.model('Message', messageSchema);
