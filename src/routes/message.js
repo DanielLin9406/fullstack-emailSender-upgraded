@@ -1,5 +1,5 @@
-import uuidv4 from 'uuid/v4';
-import { Router } from 'express';
+const uuidv4 = require('uuid/v4');
+const Router = require('express').Router;
 
 const router = Router();
 
@@ -55,4 +55,4 @@ router.delete('/:messageId', async (req, res) => {
   // return res.send(message);
 });
 
-export default router;
+module.exports = router;

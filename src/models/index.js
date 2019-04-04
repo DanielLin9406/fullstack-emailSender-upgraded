@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-import User from './user';
-import Message from './message';
+const User = require('./user');
+const Message = require('./message');
 
 const dBUrl = process.env.DATABASE_URL
 const opts = { useNewUrlParser: true };
@@ -12,8 +12,10 @@ const connectDb = () => {
 
 const models = { User, Message };
 
-export { connectDb };
-export default models;
+module.exports = {
+  connectDb,
+  models
+}
 
 // let users = {
 //   1: {

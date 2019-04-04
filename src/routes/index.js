@@ -1,9 +1,9 @@
-import session from './session';
-import user from './user';
-import message from './message';
-import auth from './auth';
+const session = require('./session');
+const user = require('./user');
+const message = require('./message');
+const auth = require('./auth');
 
-export default {
+module.exports = {
   session,
   user,
   message,

@@ -1,8 +1,7 @@
-import { Router } from 'express';
-import passport from 'passport';
-import { googleAPIKeys } from '../config/keys';
-
-const router = Router();
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const googleAPIKeys = require('../config/keys').googleAPIKeys;
 
 router.get('/google', 
   passport.authenticate('google', {
@@ -18,4 +17,4 @@ router.get('/current_user', (req, res) => {
   res.send(req.user)
 })
 
-export default router;
+module.exports = router;

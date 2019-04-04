@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   googleId: String,
@@ -22,4 +22,4 @@ userSchema.pre('remove', function(next) {
   this.model('Message').deleteMany({ user: this._id }, next);
 });
 
-export default mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

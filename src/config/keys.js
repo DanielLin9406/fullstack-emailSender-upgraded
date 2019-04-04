@@ -1,13 +1,13 @@
 const googleAPIKeys = {
-  clientID: '357528010458-er390kgdk5npcmoorhm9snmq48pslkt1.apps.googleusercontent.com',
-  clientSecret: 'cm3k9UqHwIL9U3Z82zrX6UYA',
-  callbackURI: '/auth/google/callback',
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURI: process.env.CALLBACK_URI,
 }
 const sessionKey = {
-  cookieKey: 'wefecmaldijaeerdnmk'
+  cookieKey: process.env.COOKIE_KEY
 }
 
-export {
+module.exports = {
   googleAPIKeys,
   sessionKey
 }

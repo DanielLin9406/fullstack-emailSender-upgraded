@@ -1,13 +1,15 @@
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import cookieSession from 'cookie-session';
-import models, { connectDb } from './models';
-import { sessionKey } from './config/keys';
-import './services/passport';
-import routes from './routes';
-import passport from 'passport';
+require('dotenv/config');
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
+const schema = require('./models')
+const models = schema.models;
+const connectDb = schema.connectDb;
+const sessionKey = require('./config/keys');
+require('./services/passport');
+const routes = require('./routes');
+const passport = require('passport');
 
 const eraseDatabaseOnSync = false;
 const app = express();
@@ -35,7 +37,6 @@ app.use('/auth', routes.auth);
 app.use('/session', routes.session);
 app.use('/user', routes.user);
 app.use('/messages', routes.message);
-
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
@@ -83,7 +84,7 @@ connectDb().then(async () => {
 //   await user2.save();
 // };
 
-export default app;
+module.exports = app;
 
 // app.listen(3000, () =>
 //   console.log(`Example app listening on port ${process.env.PORT}!`),
