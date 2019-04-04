@@ -2,7 +2,9 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 import models, { connectDb } from './models';
+import { sessionKey } from './config/keys';
 import './services/passport';
 import routes from './routes';
 import passport from 'passport';
@@ -12,21 +14,27 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+// encrypt keys, allowed multiple keys which could be random picked by 
+app.use(cookieSession({
+  maxAge: 30*24*60*60*1000, 
+  keys: [sessionKey.cookieKey] 
+}))
+// Make use of cookie to handle authentication
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(async (req, res, next) => {
-  req.context = {
-    models,
-    me: await models.User.findByLogin('rwieruch'),
-  };
-  next();
-});
+// app.use(async (req, res, next) => {
+//   req.context = {
+//     models,
+//     me: await models.User.findByLogin('rwieruch'),
+//   };
+//   next();
+// });
 
+app.use('/auth', routes.auth);
 app.use('/session', routes.session);
 app.use('/user', routes.user);
 app.use('/messages', routes.message);
-app.use('/auth', routes.auth);
 
 
 connectDb().then(async () => {
