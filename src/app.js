@@ -6,13 +6,13 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const app = express();
-const schema = require('./models')
-const models = schema.models;
-const connectDb = schema.connectDb;
 const sessionKey = require('./config/keys');
 const eraseDatabaseOnSync = false;
+const schema = require('./models')
+require('./models/user');
+const models = schema.models;
+const connectDb = schema.connectDb;
 require('./services/passport');
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,9 +27,9 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes').auth(app)
-require('./routes').user(app)
-require('./routes').message(app)
+require('./routes/auth')(app)
+// require('./routes').user(app)
+// require('./routes').message(app)
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
