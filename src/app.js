@@ -6,12 +6,10 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const app = express();
-const sessionKey = require('./config/keys');
+const keys = require('./config/keys');
+const connectDb = require('./models').connectDb;
 const eraseDatabaseOnSync = false;
-const schema = require('./models')
-require('./models/user');
-const models = schema.models;
-const connectDb = schema.connectDb;
+require('./models');
 require('./services/passport');
 
 app.use(bodyParser.json());
@@ -21,7 +19,7 @@ app.use(cors());
 // encrypt keys, allowed multiple keys which could be random picked by 
 app.use(cookieSession({
   maxAge: 30*24*60*60*1000, 
-  keys: [sessionKey.cookieKey] 
+  keys: [keys.sessionKey.cookieKey] 
 }))
 // Make use of cookie to handle authentication
 app.use(passport.initialize());
