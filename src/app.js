@@ -12,6 +12,7 @@ const eraseDatabaseOnSync = false;
 require('./models');
 require('./services/passport');
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -21,6 +22,8 @@ app.use(cookieSession({
   maxAge: 30*24*60*60*1000, 
   keys: [keys.sessionKey.cookieKey] 
 }))
+
+
 // Make use of cookie to handle authentication
 app.use(passport.initialize());
 app.use(passport.session());

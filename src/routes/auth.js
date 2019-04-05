@@ -10,9 +10,15 @@ module.exports = (app) => {
   app.get(googleAPIKeys.callbackURI, 
     passport.authenticate('google')
   )
+
+  app.get('/api/logout', (req, res) => {
+    req.logout();
+    // res.redirect('/');
+  })  
   
-  app.get('/auth/current_user', (req, res) => {
-    console.log(req.user)
+  // cookie-session 把 session從cookie 當中encode並放到 req.session
+  // passport 存取 req.session 的資訊繼續deserialize
+  app.get('/api/current_user', (req, res) => {
     res.send(req.user)
   })
 }

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-
+const keys = require('../config/keys');
 const User = require('./user');
 const Message = require('./message');
 
-const dBUrl = process.env.DATABASE_URL
+const dBUrl = keys.dbURL
 const opts = { useNewUrlParser: true };
 
 const connectDb = () => {
