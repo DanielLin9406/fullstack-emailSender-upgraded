@@ -5,10 +5,7 @@
     "npm": "5.6.0"
   },
   "scripts": {
-    "start": "node --exec babel-node --prefix server server.js",
+    "start": "npm run server --prefix server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build:dev --prefix client"
-  },
-  "devDependencies": {
-    "@babel/node": "^7.2.2"
-  } 
+  }
 }
