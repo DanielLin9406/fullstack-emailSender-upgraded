@@ -44,12 +44,12 @@ connectDb().then(async () => {
     // createUsersWithMessages();
   }
 
-  // if (process.env.NODE_ENV === 'production'){
-  app.use(express.static('./build'))
-  app.get('*', (req, res) => {
-    res.sendFile('build/index.html', {root : path.resolve(__dirname, '..')})
-  })
-  // }
+  if (process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.resolve(__dirname, '../..')+'/client/build'))
+    app.get('*', (req, res) => {
+      res.sendFile('index.html', {root : path.resolve(__dirname, '../..')})
+    })
+  }
 
 
   app.listen(process.env.PORT, () =>
