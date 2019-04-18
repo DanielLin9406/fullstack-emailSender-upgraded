@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { initAuth, reloadAuth, handleLogin } from '../../../modules/auth/auth';
+import { initAuth, reloadAuth, handleLogin } from '../../../modules/authSDK/authSDK';
 import { pagePaths } from '../pagesInfo'
 import Login from './Login';
 

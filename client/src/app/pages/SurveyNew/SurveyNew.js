@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { hot } from "react-hot-loader";
 
-class Home extends Component {
+class SurveyNew extends Component {
   render(){
     return (
       <div>
-        <a href='/auth/google'> Sign In </a>
+        <h2>SurveyNew</h2>
       </div>
     )
   }
 }
 
-export default hot(module)(Home);
+export default hot(module)(SurveyNew);

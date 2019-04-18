@@ -42,7 +42,9 @@ const commonConfig = {
           loader: "url-loader",
           options: {
             limit: 8192,
-            name: `${paths.assetsDir}/images/[name].[ext]`
+            name: '[name].[ext]',
+            outputPath: 'static/assets/images',
+            publicPath: 'static/assets/images'
           }
         }
       },
@@ -52,7 +54,9 @@ const commonConfig = {
           loader: "url-loader",
           options: {
             limit: 10000,
-            name: `${paths.assetsDir}/fonts/[name].[ext]`
+            name: '[name].[ext]',
+            outputPath: 'static/assets/fonts',
+            publicPath: 'static/assets/fonts'
           }
         }
       },
@@ -61,7 +65,9 @@ const commonConfig = {
         use: {
           loader: "svg-url-loader",
           options:{
-            name: `${paths.assetsDir}/svg/[name].[ext]`
+            name: '[name].[ext]',
+            outputPath: 'static/assets/svg',
+            publicPath: 'static/assets/svg'            
           }
         }
       },
@@ -110,8 +116,8 @@ const commonConfig = {
       '@app/image': paths.imageDir,
       '@app/components':paths.componentsDir,
       '@app/pages': paths.pagesDir,
-      bigCalendarStyle: path.join(__dirname, 'node_modules/react-big-calendar/lib/css/react-big-calendar.css'),
-      dayPickerStyle: path.join(__dirname, 'node_modules/react-day-picker/lib/style.css')
+      'react-dom': '@hot-loader/react-dom',
+      materializeCSS: path.join(__dirname, 'node_modules/materialize-css/dist/css/materialize.min.css')
     }
   }
 };

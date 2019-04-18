@@ -2,6 +2,7 @@ import merge from "webpack-merge";
 import path from "path";
 import webpack from "webpack";
 import stringify from 'stringify-object-values'
+import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 
 import commonConfig from "./webpack.config.common.js";
 import env from "./webpack.env";
@@ -13,7 +14,8 @@ const devConfig = {
     index: ["react-hot-loader/patch", path.join(__dirname, "src/index.js")]
   },
   output: {
-    filename: "[name].[hash].js"
+    filename: "[name].[hash].js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -41,7 +43,8 @@ const devConfig = {
             }
           }
         ]
-      },{
+      },
+      {
         test: /\.css$/,
         use: {
           loader: "css-loader",
@@ -53,7 +56,10 @@ const devConfig = {
       }
     ]
   },
-  plugins: [new webpack.DefinePlugin(stringify(env.variables))],
+  plugins: [
+    new webpack.DefinePlugin(stringify(env.variables)),
+    new OpenBrowserPlugin({ url:'http://localhost:8080' })
+  ],
   devServer: {
     port: 8080,
     historyApiFallback: true,
@@ -62,7 +68,8 @@ const devConfig = {
     proxy: {
       "/promotions": "http://localhost:8090",
       "/price": "http://localhost:8090",
-      "/auth/google": "http://localhost:5000"
+      "/auth/google": "http://localhost:5000",
+      "/api/*":"http://localhost:5000"
     }
   }
 };

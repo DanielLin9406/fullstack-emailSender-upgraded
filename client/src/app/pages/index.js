@@ -13,15 +13,15 @@ export default () => (
       switch(pageObj.authType){
         case 'authed':
           return (
-            <AuthedRoute key={index} path={pageObj.path} component={pageObj.component} />
+            <AuthedRoute key={index} exact path={pageObj.path} component={pageObj.component} />
           )
         case 'unAuthed':
           return (
-            <UnAuthedRoute key={index} path={pageObj.path} component={pageObj.component} />
+            <UnAuthedRoute key={index} exact path={pageObj.path} component={pageObj.component} />
           )
         default:
           return (
-            <GeneralRoute key={index} path={pageObj.path} component={pageObj.component} />
+            <GeneralRoute key={index} exact path={pageObj.path} component={pageObj.component} />
           )
       }
     })}

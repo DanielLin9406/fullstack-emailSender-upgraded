@@ -1,9 +1,9 @@
 import path from 'path';
 
 const rootDir = path.join(__dirname, './');
-
-export const paths = {
+const paths = {
   rootDir,
+  buildDir: path.join(rootDir, 'build'),
   srcDir: path.join(rootDir, 'src'),
   apiDir: path.join(rootDir, 'src/api'),
   appJs: path.join(rootDir, 'src/index.js'),
@@ -18,8 +18,10 @@ export const paths = {
   routesDir: path.join(rootDir, 'src/app/routes'),
   modulesDir: path.join(rootDir, 'src/app/modules'),
   nodeModulesDir: path.join(rootDir, 'node_modules'),
-  buildDir: path.join(rootDir, 'build'),
   appHtml: path.join(rootDir, 'src/assets/templates/index.html'),
+  webpackVisualizerHtml: 'report/webpack-visualizer.html'
+}
+const url = {
   servedUrl: '/',
   pgInternalApiUrl:{
     production: 'https://intrapi.positivegrid.com/v2',
@@ -27,5 +29,17 @@ export const paths = {
     apiDoc: 'http://localhost:7000/v2',
     jsonserver: "http://localhost:8090",
   },
-  webpackVisualizerHtml: 'report/webpack-visualizer.html'
+}
+
+const pubKey = {
+  stripe:{
+    production:'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE',
+    development:'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE'
+  }
+}
+
+export {
+  paths,
+  url,
+  pubKey
 }

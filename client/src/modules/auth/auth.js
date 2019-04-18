@@ -1,105 +1,54 @@
-import authApi from '../../api/spark/auth'
-
+import axios from 'axios';
 /*
 * define action name
 */
 
-export const INIT_AUTH = "auth/INIT_AUTH";
-export const INIT_AUTH_FINISH = "auth/INIT_AUTH_FINISH";
-export const SIGN_IN = "auth/SIGN_IN";
-export const SIGN_IN_SUCCESS = "auth/SIGN_IN_SUCCESS";
-export const SIGN_IN_FAILURE = "auth/SIGN_IN_FAILURE";
-export const SIGN_OUT = "auth/SIGN_OUT";
-export const SIGN_OUT_SUCCESS = "auth/SIGN_OUT_SUCCESS";
+/*
+* define async action name
+*/
+export const FETCH_USER = 'fetch_user';
 
 /*
 * state init (scheduledPrice in redux)
 */
 
 export const initialState = {
-  initialized: false,
-  authenticated: false,
-  user: undefined,
-  error: undefined
+  user: null
 }
 
+/*
+* auth reducer
+*/
 export default (state = initialState, action) => {
-  switch (action.type) {
-    case 'INIT_AUTH': {
-      const user = action.payload
-      return {
-        ...state,
-        initialized: true,
-        authenticated: !!user,
-        user
-      }
-    }
-    case 'RELOAD_AUTH':
-      return {
-        ...state,
-        user: action.payload
-      }
-    case 'LOGIN_SUCCESS':
-      return {
-        ...state,
-        authenticated: true,
-        user: action.payload,
-        error: undefined
-      }
-    case 'LOGIN_FAILURE':
-      return {
-        ...state,
-        authenticated: false,
-        user: undefined,
-        error: action.payload
-      }
-    case 'LOGOUT_SUCCESS':
-      return {
-        ...state,
-        authenticated: false,
-        user: undefined,
-        error: undefined
-      }
+  switch(action.type){
+    case FETCH_USER:
+      return Object.assign({}, state, {
+        user: action.payload || false
+      })
     default:
-      return state
-  }  
+      return state;
+  }
 }
+
+/*
+* export sync packaged dispatch
+*/
 
 /*
 * export async packaged dispatch
 */
+export const asyncFetchUser = () => async dispatch => {
+  const res = await axios.get('/api/current_user');
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  })
+} 
 
-export const initAuth = () => async dispatch => {
-  const user = await authApi.initAuthentication()
-  dispatch({ type: 'INIT_AUTH', payload: user })
-  const tenMins = 10 * 60 * 1000
-  let expiresIn = user.expiryDate - Date.now() - tenMins
-  if (expiresIn < 0) expiresIn = 0
-  setTimeout(() => reloadAuth(dispatch), expiresIn)
-}
-
-// Instant invoke
-export const reloadAuth = () => async dispatch => {
-  const user = await authApi.reloadAuthentication()
-  dispatch({ type: 'RELOAD_AUTH', payload: user })  
-}
-
-// For event click
-export const handleLogin = () => dispatch => {
-  return async () => {
-    try {
-      const user = await authApi.signInWithGoogle()
-      dispatch({ type: 'LOGIN_SUCCESS', payload: user })
-    } catch (error) {
-      dispatch({ type: 'LOGIN_FAILURE', payload: error.message })
-    }
-  }  
-}
-
-// For event click
-export const handleLogout = () => dispatch => {
-  return async () => {
-    await authApi.signOutWithGoogle()
-    dispatch({ type: 'LOGOUT_SUCCESS' })    
-  }
-}
+export const asyncHandleToken = (token) => async dispatch => {
+  const res = await axios.post('/api/stripe', token);
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  })
+} 

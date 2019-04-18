@@ -9,8 +9,14 @@ const sessionKey = {
 
 const dbURL = process.env.DATABASE_URL_DEV
 
+const stripeAPIKeys = {
+  publishKey: process.env.STRIPE_PUB_KEY,
+  secretKey: process.env.STRIPE_SECRET_KEY
+}
+
 module.exports = {
   googleAPIKeys,
   sessionKey,
+  stripeAPIKeys,
   dbURL
 }

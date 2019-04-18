@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const path = require('path');
 
 const app = express();
 const keys = require('./config/keys');
@@ -29,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/auth')(app)
+require('./routes/billing')(app)
 // require('./routes').user(app)
 // require('./routes').message(app)
 
@@ -41,6 +43,15 @@ connectDb().then(async () => {
 
     // createUsersWithMessages();
   }
+
+  // if (process.env.NODE_ENV === 'production'){
+  app.use(express.static('./build'))
+  app.get('*', (req, res) => {
+    res.sendFile('build/index.html', {root : path.resolve(__dirname, '..')})
+  })
+  // }
+
+
   app.listen(process.env.PORT, () =>
     console.log(`Example app listening on port ${process.env.PORT}!`),
   );

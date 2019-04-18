@@ -1,5 +1,5 @@
 import packageJSON from './package.json'
-import { paths } from './webpack.const'
+import { url, pubKey } from './webpack.const'
 
 const ENV = process.env.NODE_ENV || "development";
 
@@ -11,14 +11,14 @@ const VARIABLES = {
   GAPI_CLIENT_ID:'980338893576-14grhjqtoieo92bhuf8hfs29ubufcig7.apps.googleusercontent.com', 
 }
 
-
 const ENV_VARIABLES = {
   production: {
     'process.env.NODE_ENV': 'production',
     'app.env':{
       ...VARIABLES,
       MONITORING: true,
-      PG_INTERNAL_API_URL: paths.pgInternalApiUrl[process.env.NODE_ENV_API]      
+      STRIPE_PUB_KEY: pubKey.stripe[process.env.NODE_ENV],
+      PG_INTERNAL_API_URL: url.pgInternalApiUrl[process.env.NODE_ENV_API]      
     }    
   },
   development:{
@@ -26,7 +26,8 @@ const ENV_VARIABLES = {
     'app.env':{
       ...VARIABLES,
       MONITORING: true,
-      PG_INTERNAL_API_URL: paths.pgInternalApiUrl[process.env.NODE_ENV_API]
+      STRIPE_PUB_KEY: pubKey.stripe[process.env.NODE_ENV],
+      PG_INTERNAL_API_URL: url.pgInternalApiUrl[process.env.NODE_ENV_API]
     }    
   }, 
 }
@@ -35,5 +36,6 @@ export default {
   name: ENV,
   isDev: ENV === 'development',
   variables: ENV_VARIABLES[ENV],
+  stripeKey: pubKey.stripe[ENV],
   pgInternalApiUrl: ENV_VARIABLES[ENV]['app.env'].PG_INTERNAL_API_URL
 }

@@ -1,8 +1,10 @@
 import Loadable from "../components/Loadable/Loadable";
 
 const pagePaths = {
-  INDEX: '/',
+  LANDING: '/',
   LOGIN: '/login',
+  DASHBOARD: '/surveys',
+  SURVEYNEW:'/surveys/new'
 }
 
 const pagesInfo = [
@@ -15,10 +17,27 @@ const pagesInfo = [
     authType: 'unAuthed'
   },
   {
-    path: pagePaths.INDEX,
+    path: pagePaths.LANDING,
     component: Loadable({
-      loader: () => import(/* webpackChunkName: "login" */ "./Home/Container"),
-      modules: ["home"]
+      loader: () => import(/* webpackChunkName: "landing" */ "./Landing/Container"),
+      modules: ["landing"]
+    }),
+    authType: 'general'
+  },
+  {
+    path: pagePaths.DASHBOARD,
+    component: Loadable({
+      loader: () => import(/* webpackChunkName: "dashboard" */ "./Dashboard/Container"),
+      modules: ["dashboard"]
+    }),
+    authType: 'general',
+  },
+  {
+    // path: pagePaths.SURVEYNEW,
+    path: '/surveys/new',
+    component: Loadable({
+      loader: () => import(/* webpackChunkName: "surveynew" */ "./SurveyNew/Container"),
+      modules: ["surveynew"]
     }),
     authType: 'general'
   }

@@ -7,13 +7,17 @@ module.exports = (app) => {
     scope: ['profile', 'email']
   }))
   
+  // Because passport is also a middleware
   app.get(googleAPIKeys.callbackURI, 
-    passport.authenticate('google')
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys')
+    }
   )
 
   app.get('/api/logout', (req, res) => {
     req.logout();
-    // res.redirect('/');
+    res.redirect('/');
   })  
   
   // cookie-session 把 session從cookie 當中encode並放到 req.session

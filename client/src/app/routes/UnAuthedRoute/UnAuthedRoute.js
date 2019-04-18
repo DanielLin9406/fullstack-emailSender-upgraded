@@ -8,7 +8,7 @@ const UnAuthedRoute = ({ path, unauthenticated, ...props }) => {
       {...props}
       path={path}
       predicate={() => unauthenticated}
-      fallbackPath={pagePaths.DASHBOARD}
+      fallbackPath={pagePaths.LANDING}
     />
   )
 }

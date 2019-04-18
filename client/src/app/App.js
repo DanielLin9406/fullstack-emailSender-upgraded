@@ -2,15 +2,16 @@ import { hot } from "react-hot-loader";
 import React, { Component } from "react";
 import Pages from './pages';
 
-import './App.scss';
+import Header from "./components/Header/Container";
 
 class App extends Component {
   componentDidCatch(error, info) {
-    // logError(error, { extra: info })
+
   }
   render() {
     return (
-      <div id="app">
+      <div id="app" className="container">
+        <Header />
         <Pages />
       </div>
     );
