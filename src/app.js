@@ -4,7 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const path = require('path');
 
 const app = express();
 const keys = require('./config/keys');
@@ -48,6 +47,7 @@ connectDb().then(async () => {
     // express.static(path.resolve(__dirname, '../..')
     // res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
     app.use(express.static('client/build'))
+    const path = require('path');
     app.get('*', (req, res) => {
       res.sendFile('client/build/index.html', {root : path.resolve(__dirname, '..')})
     })
