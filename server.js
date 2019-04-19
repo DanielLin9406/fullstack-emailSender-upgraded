@@ -1,6 +1,5 @@
-const path = require('path');
+const app = require('./src/app');
 const http = require('http');
-const appInstance = require(path.resolve(__dirname, 'src')+'/app.js');
 
 // Launch http server
- http.createServer(appInstance);
+ http.createServer(app);
