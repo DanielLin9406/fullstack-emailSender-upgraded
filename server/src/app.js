@@ -45,9 +45,10 @@ connectDb().then(async () => {
   }
 
   if (process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.resolve(__dirname, '../..')+'/client/build'))
+    // express.static(path.resolve(__dirname, '../..')
+    app.use(express.static(path.resolve(__dirname, '..')+'/client/build'))
     app.get('*', (req, res) => {
-      res.sendFile('index.html', {root : path.resolve(__dirname, '../..')})
+      res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
     })
   }
 
