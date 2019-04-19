@@ -7,7 +7,7 @@ const sessionKey = {
   cookieKey: process.env.COOKIE_KEY_PROD
 }
 
-const dbURL = process.env.DATABASE_URL_PROD
+const dbURL = process.env.MONGODB_URI
 
 const stripeAPIKeys = {
   publishKey: process.env.STRIPE_PUB_KEY,
