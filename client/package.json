@@ -22,7 +22,7 @@
     "build:prod": "NODE_ENV=production NODE_ENV_API=prodution npx webpack --config webpack.js",
     "build:stage": "NODE_ENV=production NODE_ENV_API=stage npx webpack --config webpack.js",
     "build:dev": "NODE_ENV=production NODE_ENV_API=apiDoc npx webpack --config webpack.js",
-    "heroku:build":"NODE_ENV=production NODE_ENV_API=apiDoc webpack --config webpack.js",
+    "heroku:build":"NODE_ENV=production NODE_ENV_API=apiDoc npx webpack --config webpack.js",
     "httpServer": "npm run build:stage & http-server ./client/build/"
   },
   "dependencies": {
