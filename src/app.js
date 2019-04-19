@@ -49,7 +49,7 @@ connectDb().then(async () => {
     app.use(express.static('client/build'))
     const path = require('path');
     app.get('*', (req, res) => {
-      res.sendFile('client/build/index.html', {root : path.resolve(__dirname, '..')})
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
   // }
 
