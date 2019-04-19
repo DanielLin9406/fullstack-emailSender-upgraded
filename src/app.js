@@ -43,15 +43,16 @@ connectDb().then(async () => {
     // createUsersWithMessages();
   }
 
-  if (process.env.NODE_ENV === 'production'){
+  // if (process.env.NODE_ENV === 'production'){
     // express.static(path.resolve(__dirname, '../..')
     // res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
     app.use(express.static('client/build'))
     const path = require('path');
     app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+      res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
+      // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
-  }
+  // }
 
 
   app.listen(process.env.PORT, () =>
