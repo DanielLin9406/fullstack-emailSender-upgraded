@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const path = require('path');
 
 const app = express();
 const keys = require('./config/keys');
@@ -43,14 +44,14 @@ connectDb().then(async () => {
     // createUsersWithMessages();
   }
 
-  if (process.env.NODE_ENV === 'production'){
+  // if (process.env.NODE_ENV === 'production'){
     // express.static(path.resolve(__dirname, '../..')
-    const path = require('path');
-    app.use(express.static(path.resolve(__dirname, '..')+'/client/build'))
+    // res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
+    app.use(express.static('client/build'))
     app.get('*', (req, res) => {
-      res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
+      res.sendFile('client/build/index.html', {root : path.resolve(__dirname, '..')})
     })
-  }
+  // }
 
 
   app.listen(process.env.PORT, () =>
