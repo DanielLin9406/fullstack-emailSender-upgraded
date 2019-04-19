@@ -13,7 +13,7 @@
     "client": "npm start --prefix ./client/",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd client && npm install -g webpack-cli && npm install && npm run heroku:build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install -D webpack-cli && npm install --prefix client && npm run heroku:build --prefix client"
   },
   "keywords": [],
   "author": "",
