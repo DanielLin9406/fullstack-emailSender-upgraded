@@ -116,6 +116,7 @@ const commonConfig = {
       '@app/image': paths.imageDir,
       '@app/components':paths.componentsDir,
       '@app/pages': paths.pagesDir,
+      '@app/shared': paths.sharedDir,
       'react-dom': '@hot-loader/react-dom',
       materializeCSS: path.join(__dirname, 'node_modules/materialize-css/dist/css/materialize.min.css')
     }

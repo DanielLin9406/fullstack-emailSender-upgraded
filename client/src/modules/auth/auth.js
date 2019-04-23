@@ -7,7 +7,6 @@ import axios from 'axios';
 * define async action name
 */
 export const FETCH_USER = 'fetch_user';
-
 /*
 * state init (scheduledPrice in redux)
 */
@@ -52,3 +51,14 @@ export const asyncHandleToken = (token) => async dispatch => {
     payload: res.data
   })
 } 
+
+export const asyncSubmitSurvey = (values, history) => async dispatch => {
+  const res = await axios.post('/api/surveys', values)
+
+  history.push('/surveys');
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  })
+}
+

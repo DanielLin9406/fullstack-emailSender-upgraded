@@ -14,9 +14,14 @@ const stripeAPIKeys = {
   secretKey: process.env.STRIPE_SECRET_KEY
 }
 
+const sendGridAPIKeys = process.env.SENDGRID_KEY;
+const redirectDomain = process.env.REDIRECT_DOMAIN;
+
 module.exports = {
   googleAPIKeys,
   sessionKey,
   stripeAPIKeys,
-  dbURL
+  dbURL,
+  sendGridAPIKeys,
+  redirectDomain
 }

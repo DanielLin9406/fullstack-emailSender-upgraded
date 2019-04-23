@@ -30,6 +30,7 @@ app.use(passport.session());
 
 require('./routes/auth')(app)
 require('./routes/billing')(app)
+require('./routes/survey')(app)
 // require('./routes').user(app)
 // require('./routes').message(app)
 

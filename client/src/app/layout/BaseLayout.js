@@ -17,7 +17,7 @@ class BaseLayout extends Component {
     rest.title ? rest.title + seo.defaultSep + seo.defaultTitle : seo.defaultTitle
   )
 
-  getLinks = (pathname) => (
+  getLinks = (a, pathname) => (
     [{
       rel: 'canonical',
       href: seo.SITE_URL + pathname      

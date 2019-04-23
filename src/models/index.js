@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 const User = require('./user');
+const Surveys = require('./survey');
 const Message = require('./message');
 
 const dBUrl = keys.dbURL
@@ -10,7 +11,7 @@ const connectDb = () => {
   return mongoose.connect(dBUrl, opts);
 };
 
-const models = { User, Message };
+const models = { User, Message, Surveys };
 
 module.exports = {
   connectDb,
