@@ -16,7 +16,7 @@ const paths = {
   pagesDir: path.join(rootDir, 'src/app/pages'),
   layoutDir: path.join(rootDir, 'src/app/layout'),
   routesDir: path.join(rootDir, 'src/app/routes'),
-  modulesDir: path.join(rootDir, 'src/app/modules'),
+  modulesDir: path.join(rootDir, 'src/modules'),
   nodeModulesDir: path.join(rootDir, 'node_modules'),
   appHtml: path.join(rootDir, 'src/assets/templates/index.html'),
   webpackVisualizerHtml: 'report/webpack-visualizer.html'

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { asyncFetchSurveys } from '../../../modules/survey/survey';
+import { asyncFetchSurveys } from '@app/modules/survey/survey';
 import SurveyList from './SurveyList';
 
 const mapStateToProps = state => ({

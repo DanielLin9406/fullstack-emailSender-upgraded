@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Payments from '../Payments/Container';
+import Payments from '@app/components/Payments/Container';
 
 const List = styled.li`
   margin:0 5px;

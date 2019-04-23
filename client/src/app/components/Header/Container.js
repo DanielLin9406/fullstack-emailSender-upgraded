@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { asyncFetchUser } from '../../../modules/auth/auth';
+import { asyncFetchUser } from '@app/modules/auth/auth';
 import Header from './Header';
 
 const mapStateToProps = state => ({

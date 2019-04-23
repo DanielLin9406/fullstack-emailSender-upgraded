@@ -8,10 +8,6 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./app/App";
 import './index.scss';
 
-
-import axios from 'axios';
-window.axios = axios;
-
 const { store } = createStore();
 const root = document.querySelector("#root");
 const Application = (

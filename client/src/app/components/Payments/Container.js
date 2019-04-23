@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { asyncHandleToken } from '../../../modules/auth/auth';
+import { asyncHandleToken } from '@app/modules/auth/auth';
 import Payments from './Payments';
 
 const mapDispatchToProps = dispatch =>
