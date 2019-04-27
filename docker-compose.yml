@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    build: ./client
+    image: node-frontend
+    volumes:
+      - ./client:/home/node-frontend/
+      - /home/node-frontend/node_modules
+    networks:
+      - frontend-tier
+    ports:
+      - 8080:8080
+    command: npm start                 
+  api:
+    build: .
+    image: node-backend
+    volumes:
+      - .:/home/node-backend/
+      - /home/node-backend/node_modules
+    env_file:
+      - .env
+    networks:
+      - backend-tier
+    ports:
+      - 5010:5000
+    command: npm run server
+networks:
+  frontend-tier:
+  backend-tier:

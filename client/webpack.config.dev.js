@@ -2,7 +2,7 @@ import merge from "webpack-merge";
 import path from "path";
 import webpack from "webpack";
 import stringify from 'stringify-object-values'
-import OpenBrowserPlugin from 'open-browser-webpack-plugin';
+// import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 
 import commonConfig from "./webpack.config.common.js";
 import env from "./webpack.env";
@@ -17,6 +17,11 @@ const devConfig = {
     filename: "[name].[hash].js",
     publicPath: "/"
   },
+  // For notice docker to hot reload
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  },  
   module: {
     rules: [
       {
@@ -58,7 +63,7 @@ const devConfig = {
   },
   plugins: [
     new webpack.DefinePlugin(stringify(env.variables)),
-    new OpenBrowserPlugin({ url:'http://localhost:8080' })
+    // new OpenBrowserPlugin({ url:'http://localhost:8080' })
   ],
   devServer: {
     port: 8080,
@@ -66,8 +71,6 @@ const devConfig = {
     host: "0.0.0.0",
     hot:true,
     proxy: {
-      "/promotions": "http://localhost:8090",
-      "/price": "http://localhost:8090",
       "/auth/google": "http://localhost:5000",
       "/api/*":"http://localhost:5000"
     }
