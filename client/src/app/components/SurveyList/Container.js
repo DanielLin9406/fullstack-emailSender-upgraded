@@ -1,14 +1,17 @@
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { asyncFetchSurveys } from '@app/modules/survey/survey';
 import SurveyList from './SurveyList';
 
 const mapStateToProps = state => ({
-  survey: state.survey.survey,
+  survey: state.survey.survey
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ asyncFetchSurveys }, dispatch);
 
-export default connect( mapStateToProps, mapDispatchToProps)(SurveyList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SurveyList);

@@ -1,12 +1,14 @@
-@import "~materializeCSS";
-*{
-  padding:0;
-  margin:0;
-  &:focus{
+@import '~materializeCSS';
+* {
+  padding: 0;
+  margin: 0;
+  &:focus {
     outline: none;
     box-shadow: none;
-  }  
+  }
 }
 
-html{}
-#root{}
+html {
+}
+#root {
+}

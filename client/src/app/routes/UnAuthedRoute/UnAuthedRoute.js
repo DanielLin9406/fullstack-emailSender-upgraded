@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { pagePaths } from '@app/pages/pagesInfo';
+import { string, any } from 'prop-types';
 import RouteUnit from '../RouteUnit/Container';
-import { pagePaths } from '@app/pages/pagesInfo'
 
 const UnAuthedRoute = ({ path, unauthenticated, ...props }) => {
   return (
@@ -10,7 +11,11 @@ const UnAuthedRoute = ({ path, unauthenticated, ...props }) => {
       predicate={() => unauthenticated}
       fallbackPath={pagePaths.LANDING}
     />
-  )
-}
+  );
+};
+UnAuthedRoute.propTypes = {
+  unauthenticated: any,
+  path: string
+};
 
 export default UnAuthedRoute;

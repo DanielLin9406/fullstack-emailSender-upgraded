@@ -5,5 +5,5 @@ export default function combineReducers(state = {}, action) {
   return {
     auth: auth(state.auth, action),
     survey: survey(state.survey, action)
-  }
+  };
 }

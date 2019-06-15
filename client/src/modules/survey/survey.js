@@ -1,42 +1,42 @@
 import axios from 'axios';
 /*
-* define action name
-*/
+ * define action name
+ */
 
 /*
-* define async action name
-*/
-export const FETCH_SURVEYS = 'fetch_surveys'
+ * define async action name
+ */
+export const FETCH_SURVEYS = 'fetch_surveys';
 /*
-* state init (scheduledPrice in redux)
-*/
+ * state init (scheduledPrice in redux)
+ */
 
 export const initialState = {
   survey: []
-}
+};
 
 /*
-* auth reducer
-*/
+ * auth reducer
+ */
 export default (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case FETCH_SURVEYS:
       return Object.assign({}, state, {
         survey: action.payload || false
-      })
+      });
     default:
       return state;
   }
-}
+};
 
 /*
-* export async packaged dispatch
-*/
+ * export async packaged dispatch
+ */
 
 export const asyncFetchSurveys = () => async dispatch => {
-  const res = await axios.get('/api/surveys')
+  const res = await axios.get('/api/surveys');
   dispatch({
     type: FETCH_SURVEYS,
     payload: res.data
-  })
-}
+  });
+};

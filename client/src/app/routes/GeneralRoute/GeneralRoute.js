@@ -1,14 +1,19 @@
-import React from "react";
+import React from 'react';
+import { hot } from 'react-hot-loader';
 import RouteUnit from '../RouteUnit/Container';
-import { hot } from "react-hot-loader";
+import BaseLayout from '../../layout/BaseLayout';
 
 const GeneralRoute = ({ ...props }) => {
   return (
-    <RouteUnit
-      {...props}
-      predicate={() => {return true}}
-    />
-  )
-}
+    <BaseLayout>
+      <RouteUnit
+        {...props}
+        predicate={() => {
+          return true;
+        }}
+      />
+    </BaseLayout>
+  );
+};
 
 export default hot(module)(GeneralRoute);

@@ -1,64 +1,63 @@
 import axios from 'axios';
 /*
-* define action name
-*/
+ * define action name
+ */
 
 /*
-* define async action name
-*/
+ * define async action name
+ */
 export const FETCH_USER = 'fetch_user';
 /*
-* state init (scheduledPrice in redux)
-*/
+ * state init (scheduledPrice in redux)
+ */
 
 export const initialState = {
   user: null
-}
+};
 
 /*
-* auth reducer
-*/
+ * auth reducer
+ */
 export default (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case FETCH_USER:
       return Object.assign({}, state, {
         user: action.payload || false
-      })
+      });
     default:
       return state;
   }
-}
+};
 
 /*
-* export sync packaged dispatch
-*/
+ * export sync packaged dispatch
+ */
 
 /*
-* export async packaged dispatch
-*/
+ * export async packaged dispatch
+ */
 export const asyncFetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
   dispatch({
     type: FETCH_USER,
     payload: res.data
-  })
-} 
+  });
+};
 
-export const asyncHandleToken = (token) => async dispatch => {
+export const asyncHandleToken = token => async dispatch => {
   const res = await axios.post('/api/stripe', token);
   dispatch({
     type: FETCH_USER,
     payload: res.data
-  })
-} 
+  });
+};
 
 export const asyncSubmitSurvey = (values, history) => async dispatch => {
-  const res = await axios.post('/api/surveys', values)
+  const res = await axios.post('/api/surveys', values);
 
   history.push('/surveys');
   dispatch({
     type: FETCH_USER,
     payload: res.data
-  })
-}
-
+  });
+};

@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { asyncSubmitSurvey } from '@app/modules/auth/auth';
 
@@ -9,5 +9,8 @@ import SurveyFormReview from './SurveyFormReview';
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ asyncSubmitSurvey }, dispatch);
 
-const ConnectedSurveyFormReview = connect( null, mapDispatchToProps)(SurveyFormReview);
+const ConnectedSurveyFormReview = connect(
+  null,
+  mapDispatchToProps
+)(SurveyFormReview);
 export { SurveyForm, ConnectedSurveyFormReview };

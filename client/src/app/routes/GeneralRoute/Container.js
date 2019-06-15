@@ -1,3 +1,3 @@
-import GeneralRoute from "./GeneralRoute";
+import GeneralRoute from './GeneralRoute';
 
 export default GeneralRoute;
