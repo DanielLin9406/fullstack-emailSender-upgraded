@@ -3,11 +3,12 @@ import { hot } from 'react-hot-loader';
 // import logo from '@app/image/data.png';
 import { Link } from 'react-router-dom';
 import SurveyList from '@app/components/SurveyList/Container';
+import BaseLayout from '../../layout/base/BaseLayout';
 
 class Survey extends Component {
   render() {
     return (
-      <div>
+      <BaseLayout>
         <h3>Survey Dashboard</h3>
         {/* <img src={logo}></img> */}
         <SurveyList />
@@ -19,7 +20,7 @@ class Survey extends Component {
             <i className="material-icons">add</i>
           </Link>
         </div>
-      </div>
+      </BaseLayout>
     );
   }
 }

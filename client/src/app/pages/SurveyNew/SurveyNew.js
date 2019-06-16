@@ -11,6 +11,7 @@ import {
   validateSubject,
   validateTitle
 } from '@app/shared/validateForm';
+import BaseLayout from '../../layout/base/BaseLayout';
 
 const FIELDS = [
   {
@@ -71,7 +72,7 @@ class SurveyNew extends Component {
   }
 
   render() {
-    return <div>{this.renderContent()}</div>;
+    return <BaseLayout>{this.renderContent()}</BaseLayout>;
   }
 }
 
