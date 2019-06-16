@@ -2,7 +2,7 @@ import Loadable from '../components/Loadable/Loadable';
 
 const pagePaths = {
   LANDING: '/',
-  DASHBOARD: '/surveys',
+  SURVEY: '/surveys',
   SURVEYNEW: '/surveys/new'
 };
 
@@ -17,13 +17,13 @@ const pagesInfo = [
     authType: 'general'
   },
   {
-    path: pagePaths.DASHBOARD,
+    path: pagePaths.SURVEY,
     component: Loadable({
       loader: () =>
-        import(/* webpackChunkName: "dashboard" */ './Dashboard/Container'),
-      modules: ['dashboard']
+        import(/* webpackChunkName: "survey" */ './Survey/Container'),
+      modules: ['survey']
     }),
-    authType: 'general'
+    authType: 'authed'
   },
   {
     path: pagePaths.SURVEYNEW,
@@ -32,7 +32,7 @@ const pagesInfo = [
         import(/* webpackChunkName: "surveynew" */ './SurveyNew/Container'),
       modules: ['surveynew']
     }),
-    authType: 'general'
+    authType: 'authed'
   }
 ];
 

@@ -11,15 +11,21 @@ export const isServer = !(
 
 export default () => {
   const enhancers = [];
+  // Dev tools are helpful
+  if (process.env.NODE_ENV === 'development' && !isServer) {
+    const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+
+    if (typeof devToolsExtension === 'function') {
+      enhancers.push(devToolsExtension());
+    }
+  }
 
   const middleware = [thunkMiddleware];
+  const initialState = !isServer ? window.__PRELOADED_STATE__ : {};
   const composedEnhancers = compose(
     applyMiddleware(...middleware),
     ...enhancers
   );
-
-  // Do we have preloaded state available? Great, save it.
-  const initialState = !isServer ? window.__PRELOADED_STATE__ : {};
 
   // Delete it once we have it stored in a variable
   if (!isServer) {
@@ -28,22 +34,12 @@ export default () => {
 
   const store = createStore(rootReducer, initialState, composedEnhancers);
 
-  // Dev tools are helpful
-  if (process.env.NODE_ENV === 'development' && !isServer) {
-    const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
-
-    if (typeof devToolsExtension === 'function') {
-      enhancers.push(devToolsExtension());
-    }
-
-    if (module.hot) {
-      module.hot.accept('./modules/index', () => {
-        const nextCombineReducers = require('./modules/index').default;
-        store.replaceReducer(nextCombineReducers);
-      });
-    }
+  if (module.hot) {
+    module.hot.accept('./modules/index', () => {
+      const nextCombineReducers = require('./modules/index').default;
+      store.replaceReducer(nextCombineReducers);
+    });
   }
-
   return {
     store
   };

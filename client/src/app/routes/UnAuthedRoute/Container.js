@@ -3,7 +3,7 @@ import { pagePaths } from '@app/pages/pagesInfo';
 import UnAuthedRoute from './UnAuthedRoute';
 
 const mapStateToProps = state => ({
-  unauthenticated: !state.auth.authenticated
+  unauthenticated: !state.auth.user
 });
 
 const ConnectedUnAuthedRoute = connect(

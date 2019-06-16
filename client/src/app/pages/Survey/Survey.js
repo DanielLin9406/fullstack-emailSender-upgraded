@@ -4,11 +4,11 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import SurveyList from '@app/components/SurveyList/Container';
 
-class Dashboard extends Component {
+class Survey extends Component {
   render() {
     return (
       <div>
-        <h3>Dashboard</h3>
+        <h3>Survey Dashboard</h3>
         {/* <img src={logo}></img> */}
         <SurveyList />
         <div className="fixed-action-btn">
@@ -24,4 +24,4 @@ class Dashboard extends Component {
   }
 }
 
-export default hot(module)(Dashboard);
+export default hot(module)(Survey);

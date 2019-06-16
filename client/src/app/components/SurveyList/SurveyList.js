@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { oneOfType, func, bool, arr } from 'prop-types';
+import { oneOfType, func, bool, arr, shape } from 'prop-types';
 
 class SurveyList extends Component {
   static propTypes = {
     asyncFetchSurveys: func,
-    survey: oneOfType([arr, bool])
+    survey: oneOfType([arr, bool]),
+    user: oneOfType([bool, shape({})])
   };
 
   componentDidMount() {
@@ -24,8 +25,8 @@ class SurveyList extends Component {
             </p>
           </div>
           <div className="card-action">
-            <a href>Yes: {survey.yes}</a>
-            <a href>No: {survey.no}</a>
+            <a href="true">Yes: {survey.yes}</a>
+            <a href="true">No: {survey.no}</a>
           </div>
         </div>
       );

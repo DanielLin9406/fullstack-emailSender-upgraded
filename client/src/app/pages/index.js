@@ -1,9 +1,10 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import UnAuthedRoute from '../routes/UnAuthedRoute/Container';
 import AuthedRoute from '../routes/AuthedRoute/Container';
 import BaseRoute from '../routes/BaseRoute/Container';
+import NotFound from './404';
 import getAllPages from './helper';
 import { pagesInfo } from './pagesInfo';
 
@@ -21,5 +22,6 @@ export default () => (
             return <BaseRoute exact key={pageObj.path} {...pageObj} />;
         }
       })}
+    <Route component={NotFound} />
   </Switch>
 );
