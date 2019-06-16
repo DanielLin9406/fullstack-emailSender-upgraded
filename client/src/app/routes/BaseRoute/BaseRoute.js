@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader';
 import RouteUnit from '../RouteUnit/Container';
 import BaseLayout from '../../layout/BaseLayout';
 
-const GeneralRoute = ({ ...props }) => {
+const BaseRoute = ({ ...props }) => {
   return (
     <BaseLayout>
       <RouteUnit
@@ -16,4 +16,4 @@ const GeneralRoute = ({ ...props }) => {
   );
 };
 
-export default hot(module)(GeneralRoute);
+export default hot(module)(BaseRoute);

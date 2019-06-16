@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import UnAuthedRoute from '../routes/UnAuthedRoute/Container';
 import AuthedRoute from '../routes/AuthedRoute/Container';
-import GeneralRoute from '../routes/GeneralRoute/Container';
+import BaseRoute from '../routes/BaseRoute/Container';
 import getAllPages from './helper';
 import { pagesInfo } from './pagesInfo';
 
@@ -14,32 +14,11 @@ export default () => (
       .map(pageObj => {
         switch (pageObj.authType) {
           case 'authed':
-            return (
-              <AuthedRoute
-                key={pageObj.path}
-                exact
-                path={pageObj.path}
-                component={pageObj.component}
-              />
-            );
+            return <AuthedRoute exact key={pageObj.path} {...pageObj} />;
           case 'unAuthed':
-            return (
-              <UnAuthedRoute
-                key={pageObj.path}
-                exact
-                path={pageObj.path}
-                component={pageObj.component}
-              />
-            );
+            return <UnAuthedRoute exact key={pageObj.path} {...pageObj} />;
           default:
-            return (
-              <GeneralRoute
-                key={pageObj.path}
-                exact
-                path={pageObj.path}
-                component={pageObj.component}
-              />
-            );
+            return <BaseRoute exact key={pageObj.path} {...pageObj} />;
         }
       })}
   </Switch>
