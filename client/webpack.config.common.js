@@ -4,28 +4,6 @@ import webpack from 'webpack';
 import env from './webpack.env';
 import { paths } from './webpack.const';
 
-const babelOptions = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        modules: false
-      }
-    ],
-    '@babel/preset-react'
-  ],
-  plugins: [
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-proposal-export-namespace-from',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-proposal-optional-chaining',
-    '@babel/plugin-transform-runtime',
-    'react-hot-loader/babel'
-  ],
-  cacheDirectory: true
-};
-
 const commonConfig = {
   module: {
     rules: [
@@ -33,7 +11,9 @@ const commonConfig = {
         test: /\.(js|jsx)$/,
         use: {
           loader: 'babel-loader',
-          options: babelOptions
+          options: {
+            cacheDirectory: true
+          }
         },
         include: paths.srcDir
       },
