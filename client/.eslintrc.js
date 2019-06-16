@@ -61,6 +61,8 @@ module.exports = {
     'comma-dangle': 'off',
     'implicit-arrow-linebreak': 'off',
     'import/no-unresolved': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-dynamic-require': 'off',
     'jsx-a11y/label-has-for': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',

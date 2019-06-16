@@ -20,26 +20,22 @@ const paths = {
   nodeModulesDir: path.join(rootDir, 'node_modules'),
   appHtml: path.join(rootDir, 'src/assets/templates/index.html'),
   webpackVisualizerHtml: 'report/webpack-visualizer.html'
-}
+};
 const url = {
   servedUrl: '/',
-  pgInternalApiUrl:{
+  pgInternalApiUrl: {
     production: 'https://intrapi.positivegrid.com/v2',
     stage: 'https://pg-beta-intrapi.herokuapp.com/v2',
     apiDoc: 'http://localhost:7000/v2',
-    jsonserver: "http://localhost:8090",
-  },
-}
+    jsonserver: 'http://localhost:8090'
+  }
+};
 
 const pubKey = {
-  stripe:{
-    production:'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE',
-    development:'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE'
+  stripe: {
+    production: 'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE',
+    development: 'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE'
   }
-}
+};
 
-export {
-  paths,
-  url,
-  pubKey
-}
+export { paths, url, pubKey };

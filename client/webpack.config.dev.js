@@ -1,48 +1,48 @@
-import merge from "webpack-merge";
-import path from "path";
-import webpack from "webpack";
-import stringify from 'stringify-object-values'
+import merge from 'webpack-merge';
+import path from 'path';
+import webpack from 'webpack';
+import stringify from 'stringify-object-values';
 // import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 
-import commonConfig from "./webpack.config.common.js";
-import env from "./webpack.env";
+import commonConfig from './webpack.config.common';
+import env from './webpack.env';
 
 const devConfig = {
   mode: 'development',
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   entry: {
-    index: ["react-hot-loader/patch", path.join(__dirname, "src/index.js")]
+    index: ['react-hot-loader/patch', path.join(__dirname, 'src/index.js')]
   },
   output: {
-    filename: "[name].[hash].js",
-    publicPath: "/"
+    filename: '[name].[hash].js',
+    publicPath: '/'
   },
   // For notice docker to hot reload
   watchOptions: {
     aggregateTimeout: 300,
     poll: 1000
-  },  
+  },
   module: {
     rules: [
       {
         test: /\.(sass|scss)$/,
         use: [
           {
-            loader: "style-loader"
+            loader: 'style-loader'
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
               modules: true,
-              localIdentName: "[local]"
+              localIdentName: '[local]'
             }
           },
           {
-            loader: "postcss-loader"
+            loader: 'postcss-loader'
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: true
             }
@@ -52,37 +52,36 @@ const devConfig = {
       {
         test: /\.css$/,
         use: {
-          loader: "css-loader",
+          loader: 'css-loader',
           options: {
             sourceMap: true,
-            modules: true,
+            modules: true
           }
-        },          
+        }
       }
     ]
   },
   plugins: [
-    new webpack.DefinePlugin(stringify(env.variables)),
+    new webpack.DefinePlugin(stringify(env.variables))
     // new OpenBrowserPlugin({ url:'http://localhost:8080' })
   ],
   devServer: {
     port: 8080,
     historyApiFallback: true,
-    host: "0.0.0.0",
-    hot:true,
+    host: '0.0.0.0',
+    hot: true,
     proxy: {
-      "/auth/google": "http://localhost:5000",
-      "/api/*":"http://localhost:5000"
+      '/auth/google': 'http://localhost:5000',
+      '/api/*': 'http://localhost:5000'
     }
   }
 };
 
 export default merge({
   customizeArray(a, b, key) {
-    if (key === "entry.index") {
+    if (key === 'entry.index') {
       return b;
-    } else {
-      return undefined;
     }
+    return undefined;
   }
 })(commonConfig, devConfig);
