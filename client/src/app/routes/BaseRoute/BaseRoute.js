@@ -1,18 +1,18 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import RouteUnit from '../RouteUnit/Container';
-import BaseLayout from '../../layout/base/BaseLayout';
+import HelmetLayout from '../../layout/helmet/HelmetLayout';
 
 const BaseRoute = ({ ...props }) => {
   return (
-    <BaseLayout>
+    <HelmetLayout>
       <RouteUnit
         {...props}
         predicate={() => {
           return true;
         }}
       />
-    </BaseLayout>
+    </HelmetLayout>
   );
 };
 

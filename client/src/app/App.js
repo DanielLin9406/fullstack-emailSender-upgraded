@@ -1,15 +1,12 @@
 import { hot } from 'react-hot-loader';
 import React, { Component } from 'react';
-import Pages from './pages';
-
-import Header from './components/Header/Container';
+import Routes from './routes';
 
 class App extends Component {
   render() {
     return (
       <div id="app" className="container">
-        <Header />
-        <Pages />
+        <Routes />
       </div>
     );
   }

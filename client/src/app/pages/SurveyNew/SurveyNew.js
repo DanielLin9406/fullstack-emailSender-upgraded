@@ -11,7 +11,8 @@ import {
   validateSubject,
   validateTitle
 } from '@app/shared/validateForm';
-import BaseLayout from '../../layout/base/BaseLayout';
+import HelmetLayout from '../../layout/helmet/HelmetLayout';
+import OneColLayout from '../../layout/oneCol/OneColLayout';
 
 const FIELDS = [
   {
@@ -72,7 +73,11 @@ class SurveyNew extends Component {
   }
 
   render() {
-    return <BaseLayout>{this.renderContent()}</BaseLayout>;
+    return (
+      <HelmetLayout>
+        <OneColLayout>{this.renderContent()}</OneColLayout>
+      </HelmetLayout>
+    );
   }
 }
 

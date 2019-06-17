@@ -1,5 +1,5 @@
 import React from 'react';
-import { pagePaths } from '@app/pages/pagesInfo';
+import { paths } from '@app/pages';
 import { string, any } from 'prop-types';
 import RouteUnit from '../RouteUnit/Container';
 
@@ -9,7 +9,7 @@ const UnAuthedRoute = ({ path, unauthenticated, ...props }) => {
       {...props}
       path={path}
       predicate={() => unauthenticated}
-      fallbackPath={pagePaths.LANDING}
+      fallbackPath={paths.LANDING}
     />
   );
 };

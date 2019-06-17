@@ -1,6 +1,6 @@
 import React from 'react';
 import { any } from 'prop-types';
-import { pagePaths } from '@app/pages/pagesInfo';
+import { paths } from '@app/pages';
 import RouteUnit from '../RouteUnit/Container';
 
 const AuthedRoute = ({ authenticated, ...props }) => {
@@ -10,7 +10,7 @@ const AuthedRoute = ({ authenticated, ...props }) => {
       predicate={() =>
         Object.prototype.toString.call(authenticated) === '[object Object]'
       }
-      fallbackPath={pagePaths.LANDING}
+      fallbackPath={paths.LANDING}
     />
   );
 };

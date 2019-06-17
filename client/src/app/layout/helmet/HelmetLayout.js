@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import seo from '@app/const/const';
 import { any, string, shape } from 'prop-types';
 
-class BaseLayout extends Component {
+class HelmetLayout extends Component {
   static propTypes = {
     children: shape({}),
     location: any,
@@ -104,4 +104,4 @@ class BaseLayout extends Component {
   }
 }
 
-export default withRouter(BaseLayout);
+export default withRouter(HelmetLayout);

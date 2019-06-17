@@ -58,6 +58,7 @@ module.exports = {
     'react/no-did-mount-set-state': 'off',
     'react/no-unused-prop-types': 'off', // Is still buggy
     'react/jsx-one-expression-per-line': 'off',
+    'react/prop-types': 'off',
     'comma-dangle': 'off',
     'implicit-arrow-linebreak': 'off',
     'import/no-unresolved': 'off',

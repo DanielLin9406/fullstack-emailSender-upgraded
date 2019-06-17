@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import styled from 'styled-components';
-import BaseLayout from '../../layout/base/BaseLayout';
+import HelmetLayout from '../../layout/helmet/HelmetLayout';
+import OneColLayout from '../../layout/oneCol/OneColLayout';
 
 const Section = styled.section`
   text-align: center;
@@ -10,12 +11,14 @@ const Section = styled.section`
 class Landing extends Component {
   render() {
     return (
-      <BaseLayout>
-        <Section>
-          <h1>Emaily!</h1>
-          <p>Collect feedback from your users</p>
-        </Section>
-      </BaseLayout>
+      <HelmetLayout>
+        <OneColLayout>
+          <Section>
+            <h1>Emaily!</h1>
+            <p>Collect feedback from your users</p>
+          </Section>
+        </OneColLayout>
+      </HelmetLayout>
     );
   }
 }

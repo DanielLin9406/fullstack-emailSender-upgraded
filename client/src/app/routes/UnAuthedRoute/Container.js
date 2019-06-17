@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { pagePaths } from '@app/pages/pagesInfo';
+import { paths } from '@app/pages';
 import UnAuthedRoute from './UnAuthedRoute';
 
 const mapStateToProps = state => ({
@@ -10,5 +10,5 @@ const ConnectedUnAuthedRoute = connect(
   mapStateToProps,
   null
 )(UnAuthedRoute);
-ConnectedUnAuthedRoute.defaultProps = { path: pagePaths.LOGIN };
+ConnectedUnAuthedRoute.defaultProps = { path: paths.LOGIN };
 export default ConnectedUnAuthedRoute;
