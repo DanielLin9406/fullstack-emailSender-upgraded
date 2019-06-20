@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import noop from 'lodash/noop';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
-import { oneOfType, func, shape, bool, any } from 'prop-types';
+import { oneOfType, func, bool, any } from 'prop-types';
 import styled from 'styled-components';
 
 import Payments from '@app/components/Payments/Container';
