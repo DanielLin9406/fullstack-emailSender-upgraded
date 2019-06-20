@@ -7,9 +7,7 @@ const AuthedRoute = ({ authenticated, ...props }) => {
   return (
     <RouteUnit
       {...props}
-      predicate={() =>
-        Object.prototype.toString.call(authenticated) === '[object Object]'
-      }
+      predicate={() => authenticated}
       fallbackPath={paths.LANDING}
     />
   );

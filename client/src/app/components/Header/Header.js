@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import noop from 'lodash/noop';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
-import { oneOfType, func, shape, number, bool, any } from 'prop-types';
+import { oneOfType, func, shape, bool, any } from 'prop-types';
 import styled from 'styled-components';
 
 import Payments from '@app/components/Payments/Container';
@@ -22,13 +22,7 @@ const Button = styled.button`
 class Header extends Component {
   static propTypes = {
     asyncInitAuthUser: func,
-    user: oneOfType([
-      bool,
-      any,
-      shape({
-        credits: number
-      })
-    ])
+    user: oneOfType([bool, any])
   };
 
   static defaultProps = {

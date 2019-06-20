@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { oneOfType, func, bool, arr, shape } from 'prop-types';
+import { oneOfType, func, bool, array, object } from 'prop-types';
 
 class SurveyList extends Component {
   static propTypes = {
     asyncFetchSurveys: func,
-    survey: oneOfType([arr, bool]),
-    user: oneOfType([bool, shape({})])
+    survey: oneOfType([array]),
+    user: oneOfType([bool, object])
   };
 
   componentDidMount() {
@@ -14,19 +14,19 @@ class SurveyList extends Component {
   }
 
   renderSurvey() {
-    return this.props.survey.reverse().map(survey => {
+    return this.props.survey.reverse().map(surveyItem => {
       return (
-        <div className="card darken-1" key={survey._id}>
+        <div className="card darken-1" key={surveyItem._id}>
           <div className="card-content">
-            <span className="card-title">{survey.title}</span>
-            <p>{survey.body}</p>
+            <span className="card-title">{surveyItem.title}</span>
+            <p>{surveyItem.body}</p>
             <p className="right">
-              Sent On: {new Date(survey.dateSent).toLocaleDateString()}
+              Sent On: {new Date(surveyItem.dateSent).toLocaleDateString()}
             </p>
           </div>
           <div className="card-action">
-            <a href="true">Yes: {survey.yes}</a>
-            <a href="true">No: {survey.no}</a>
+            <a href="true">Yes: {surveyItem.yes}</a>
+            <a href="true">No: {surveyItem.no}</a>
           </div>
         </div>
       );
