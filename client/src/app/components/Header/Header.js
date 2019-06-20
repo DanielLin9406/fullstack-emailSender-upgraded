@@ -11,9 +11,17 @@ const List = styled.li`
   margin: 0 5px;
 `;
 
+const Button = styled.button`
+  padding: 5px 10px;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
 class Header extends Component {
   static propTypes = {
-    asyncFetchUser: func,
+    asyncInitAuthUser: func,
     user: oneOfType([
       bool,
       any,
@@ -24,15 +32,19 @@ class Header extends Component {
   };
 
   static defaultProps = {
-    asyncFetchUser: noop
+    asyncInitAuthUser: noop
   };
 
   componentDidMount() {
-    this.props.asyncFetchUser();
+    this.props.asyncInitAuthUser();
+  }
+
+  handleLogout() {
+    this.props.asyncHandleLogout();
   }
 
   renderContent() {
-    switch (this.props.user) {
+    switch (this.props.authenticated) {
       case null:
         return;
       case false:
@@ -46,13 +58,13 @@ class Header extends Component {
           <List key="1">
             <Payments />
           </List>,
-          this.props.user ? (
+          this.props.authenticated ? (
             <List key="3">Credits: {this.props.user.credits}</List>
           ) : (
             ''
           ),
           <List key="2">
-            <a href="/api/logout">Logout</a>
+            <Button onClick={() => this.handleLogout()}>Logout</Button>
           </List>
         ];
     }
