@@ -1,13 +1,7 @@
-const user = require('./user');
-const message = require('./message');
-const auth = require('./auth');
-const billing = require('./billing');
-const survey = require('./survey');
+import authRouter from './auth';
+import apiRouter from './api';
 
-module.exports = {
-  user,
-  message,
-  auth,
-  billing,
-  survey
+export default {
+  authRouter,
+  apiRouter
 };

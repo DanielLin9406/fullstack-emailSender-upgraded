@@ -1,64 +1,55 @@
-require('dotenv/config');
-const cors = require('cors');
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
+import 'dotenv/config';
+import cors from 'cors';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
+import keys from './config/keys';
+import { connectDb } from './models';
+import './models';
+import router from './routes';
 
 const app = express();
-const keys = require('./config/keys');
-const connectDb = require('./models').connectDb;
 const eraseDatabaseOnSync = false;
-require('./models');
-require('./services/passport');
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
-// encrypt keys, allowed multiple keys which could be random picked by 
-app.use(cookieSession({
-  maxAge: 30*24*60*60*1000, 
-  keys: [keys.sessionKey.cookieKey] 
-}))
-
-
-// Make use of cookie to handle authentication
-app.use(passport.initialize());
-app.use(passport.session());
-
-require('./routes/auth')(app)
-require('./routes/billing')(app)
-require('./routes/survey')(app)
-// require('./routes').user(app)
-// require('./routes').message(app)
+// encrypt keys, allowed multiple keys which could be random picked by
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.sessionKey.cookieKey]
+  })
+);
+app.use('/auth', router.authRouter);
+app.use('/api', router.apiRouter);
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
       models.User.deleteMany({}),
-      models.Message.deleteMany({}),
+      models.Message.deleteMany({})
     ]);
 
     // createUsersWithMessages();
   }
 
-  if (process.env.NODE_ENV === 'production'){
+  if (process.env.NODE_ENV === 'production') {
     // express.static(path.resolve(__dirname, '../..')
     // res.sendFile('index.html', {root : path.resolve(__dirname, '..')})
     const path = require('path');
-    app.use(express.static(path.resolve('client/build')))
+    app.use(express.static(path.resolve('client/build')));
     app.get('*', (req, res) => {
-      res.sendFile('client/build/index.html', {root : path.resolve(__dirname, '..')})
+      res.sendFile('client/build/index.html', {
+        root: path.resolve(__dirname, '..')
+      });
       // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
+    });
   }
 
-
   app.listen(process.env.PORT, () =>
-    console.log(`Example app listening on port ${process.env.PORT}!`),
+    console.log(`Example app listening on port ${process.env.PORT}!`)
   );
 });
 
-module.exports = app;
+export default app;

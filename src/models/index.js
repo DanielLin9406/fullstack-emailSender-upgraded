@@ -4,7 +4,7 @@ const User = require('./user');
 const Surveys = require('./survey');
 const Message = require('./message');
 
-const dBUrl = keys.dbURL
+const dBUrl = keys.dbURL;
 const opts = { useNewUrlParser: true };
 
 const connectDb = () => {
@@ -16,7 +16,7 @@ const models = { User, Message, Surveys };
 module.exports = {
   connectDb,
   models
-}
+};
 
 // let users = {
 //   1: {
