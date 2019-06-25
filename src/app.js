@@ -14,7 +14,6 @@ const eraseDatabaseOnSync = false;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-// encrypt keys, allowed multiple keys which could be random picked by
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -23,6 +22,8 @@ app.use(
 );
 app.use('/auth', router.authRouter);
 app.use('/api', router.apiRouter);
+app.use('/api', router.billingRouter);
+app.use('/api', router.surveyRouter);
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {

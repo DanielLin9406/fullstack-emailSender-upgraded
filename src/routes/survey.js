@@ -1,82 +1,83 @@
-const mongoose = require('mongoose');
-const { Path } = require('path-parser');
-const { URL } = require('url');
-
-const requireLogin = require('../middlewares/requireLogin');
-const requireCredits = require('../middlewares/requireCredits');
-const keys = require('../config/keys').sendGridAPIKeys;
-
-const sgMail = require('@sendgrid/mail');
-const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
+import mongoose from 'mongoose';
+import { Path } from 'path-parser';
+import { URL } from 'url';
+import surveyRouter from './enrichRouter';
+import sgMail from '@sendgrid/mail';
+import { sendGridAPIKeys } from '../config/keys';
+import requireLogin from '../middlewares/requireLogin';
+import requireCredits from '../middlewares/requireCredits';
+import surveyTemplate from '../services/emailTemplates/surveyTemplate';
 
 const Survey = mongoose.model('Surveys');
 
-module.exports = app => {
-  app.get('/api/surveys', requireLogin, async (req, res) => {
-    const surveys = await Survey.find({
-      _user: req.user.id
-    }).select({
-      recipients: false
-    });
-    res.send(surveys);
+surveyRouter.get('/surveys', requireLogin, async (req, res) => {
+  const surveys = await Survey.find({
+    _user: req.user.id
+  }).select({
+    recipients: false
   });
+  res.send(surveys);
+});
 
-  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
-    res.send('Thanks for voting');
-  });
+surveyRouter.get('/surveys/:surveyId/:choice', (req, res) => {
+  res.send('Thanks for voting');
+});
 
-  app.post('/api/surveys/webhooks', (req, res) => {
-    const uniqBy = (arr, predicate) => {
-      const cb =
-        typeof predicate === 'function' ? predicate : o => o[predicate];
-      return [
-        ...arr
-          .reduce((map, item) => {
-            const key = cb(item);
-            map.has(key) || map.set(key, item);
-            return map;
-          }, new Map())
-          .values()
-      ];
-    };
-    const p = new Path('/api/surveys/:surveyId/:choice');
-    const uniqueEvents = uniqBy(
-      req.body
-        .map(({ email, url }) => {
-          const match = p.test(new URL(url).pathname);
-          if (match) {
-            return {
-              email,
-              surveyId: match.surveyId,
-              choice: match.choice
-            };
-          }
-        })
-        .filter(Boolean),
-      'email',
-      'surveyId'
-    );
-
-    uniqueEvents.forEach(({ surveyId, email, choice }) => {
-      Survey.updateOne(
-        {
-          _id: surveyId,
-          recipients: {
-            $elemMatch: { email: email, responded: false }
-          }
-        },
-        {
-          $inc: { [choice]: 1 },
-          $set: { 'recipients.$.responded': true },
-          lastResponded: new Date()
+surveyRouter.post('/surveys/webhooks', (req, res) => {
+  const uniqBy = (arr, predicate) => {
+    const cb = typeof predicate === 'function' ? predicate : o => o[predicate];
+    return [
+      ...arr
+        .reduce((map, item) => {
+          const key = cb(item);
+          map.has(key) || map.set(key, item);
+          return map;
+        }, new Map())
+        .values()
+    ];
+  };
+  const p = new Path('/surveys/:surveyId/:choice');
+  const uniqueEvents = uniqBy(
+    req.body
+      .map(({ email, url }) => {
+        const match = p.test(new URL(url).pathname);
+        if (match) {
+          return {
+            email,
+            surveyId: match.surveyId,
+            choice: match.choice
+          };
         }
-      ).exec();
-    });
+      })
+      .filter(Boolean),
+    'email',
+    'surveyId'
+  );
 
-    res.send({});
+  uniqueEvents.forEach(({ surveyId, email, choice }) => {
+    Survey.updateOne(
+      {
+        _id: surveyId,
+        recipients: {
+          $elemMatch: { email: email, responded: false }
+        }
+      },
+      {
+        $inc: { [choice]: 1 },
+        $set: { 'recipients.$.responded': true },
+        lastResponded: new Date()
+      }
+    ).exec();
   });
 
-  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+  res.send({});
+});
+
+surveyRouter.post(
+  '/surveys',
+  requireLogin,
+  requireCredits,
+  async (req, res) => {
     const { subject, body, recipients } = req.body;
 
     const survey = new Survey({
@@ -105,5 +106,7 @@ module.exports = app => {
     } catch (error) {
       res.status(422);
     }
-  });
-};
+  }
+);
+
+export default surveyRouter;

@@ -38,44 +38,38 @@ passport.use(
 );
 ```
 
-## Enable passport
+## Encapsulate passport and use as middleware of router
 
 ```js
-app.use(passport.initialize());
-```
+const router = Router();
+const enrichRouter = createEnrichRouter(passport);
 
-## Enable passport session
-
-```js
-app.use(passport.session());
+function createEnrichRouter(passport) {
+  router.use(passport.initialize());
+  router.use(passport.session());
+  return router;
+}
 ```
 
 ### prerequire: Enable session storage
 
 ```js
-cookieSession({
-  maxAge: 30 * 24 * 60 * 60 * 1000,
-  keys: [keys.sessionKey.cookieKey]
-});
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.sessionKey.cookieKey]
+  })
+);
 ```
 
 ## Set Auth Routes
 
 ```js
-app.use(
-  '/auth/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email']
-  }),
-  () => {}
-);
-```
+import authRouter from './enrichRouter';
+import passport from '../services/passport';
 
-## Set Callback Routes
-
-```js
-app.use(
-  '/auth/google/callback',
+authRouter.get(
+  '/google/callback',
   passport.authenticate('google'),
   (req, res) => {
     res.redirect('/surveys');
