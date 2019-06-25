@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from '../../libs/db/mongoose';
 
 const userSchema = new mongoose.Schema({
   googleId: String,
@@ -8,9 +8,9 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-userSchema.statics.findByLogin = async function (login) {
+userSchema.statics.findByLogin = async function(login) {
   let user = await this.findOne({
-    username: login,
+    username: login
   });
 
   if (!user) {
@@ -26,4 +26,15 @@ userSchema.pre('remove', function(next) {
   this.model('Message').deleteMany({ user: this._id }, next);
 });
 
-mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);
+
+// let users = {
+//   1: {
+//     id: '1',
+//     username: 'Robin Wieruch',
+//   },
+//   2: {
+//     id: '2',
+//     username: 'Dave Davids',
+//   },
+// };

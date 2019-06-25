@@ -4,13 +4,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import keys from './config/keys';
-import { connectDb } from './models';
-import './models';
-import router from './routes';
+import { connectDb } from './libs/db/mongoose';
+import user from './components/user';
+import auth from './components/auth';
+import billing from './components/billing';
+import survey from './components/survey';
 
 const app = express();
 const eraseDatabaseOnSync = false;
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -20,15 +21,15 @@ app.use(
     keys: [keys.sessionKey.cookieKey]
   })
 );
-app.use('/auth', router.authRouter);
-app.use('/api', router.apiRouter);
-app.use('/api', router.billingRouter);
-app.use('/api', router.surveyRouter);
+app.use('/auth', auth.authAPI);
+app.use('/api', user.userAPI);
+app.use('/api', billing.billingAPI);
+app.use('/api', survey.surveyAPI);
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
-      models.User.deleteMany({}),
+      user.userModel.deleteMany({}),
       models.Message.deleteMany({})
     ]);
 

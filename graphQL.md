@@ -2,6 +2,8 @@
 
 ## 一般 apollo server
 
+- 重構 node 架構，例如將 passport 封裝在 router 回傳
+- 先將 route 與 node 的 file structure 轉換成 role base instead of function base
 - 設置 apolloserver
 - 照原先 API 的業務邏輯拆分 query, mutation, 與其他自定義
 - 建立 schema 與 resolver

@@ -1,4 +1,4 @@
-import apiRouter from './enrichRouter';
+import apiRouter from '../../libs/router/enrichRouter';
 
 apiRouter.get('/current_user', (req, res) => {
   res.send(req.user);

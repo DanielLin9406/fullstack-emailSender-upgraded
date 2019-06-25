@@ -1,4 +1,4 @@
-import passport from '../services/passport';
+import passport from '../auth/passport';
 import { Router } from 'express';
 
 const router = Router();

@@ -1,5 +1,5 @@
-import authRouter from './enrichRouter';
-import passport from '../services/passport';
+import authRouter from '../../libs/router/enrichRouter';
+import passport from '../../libs/auth/passport';
 
 authRouter.get(
   '/google',

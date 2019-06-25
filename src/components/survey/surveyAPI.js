@@ -1,14 +1,12 @@
-import mongoose from 'mongoose';
 import { Path } from 'path-parser';
 import { URL } from 'url';
-import surveyRouter from './enrichRouter';
 import sgMail from '@sendgrid/mail';
-import { sendGridAPIKeys } from '../config/keys';
-import requireLogin from '../middlewares/requireLogin';
-import requireCredits from '../middlewares/requireCredits';
-import surveyTemplate from '../services/emailTemplates/surveyTemplate';
-
-const Survey = mongoose.model('Surveys');
+import Survey from './surveyModel';
+import surveyRouter from '../../libs/router/enrichRouter';
+import requireLogin from '../../libs/login/requireLogin';
+import { sendGridAPIKeys } from '../../config/keys';
+import requireCredits from '../../libs/credit/requireCredits';
+import surveyTemplate from '../../libs/email/surveyTemplate';
 
 surveyRouter.get('/surveys', requireLogin, async (req, res) => {
   const surveys = await Survey.find({
@@ -88,7 +86,7 @@ surveyRouter.post(
       dateSent: Date.now()
     });
 
-    sgMail.setApiKey(keys);
+    sgMail.setApiKey(sendGridAPIKeys);
     const msg = {
       to: survey.recipients,
       from: 'test_from@example.com',

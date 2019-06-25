@@ -1,7 +1,7 @@
-import { stripeAPIKeys } from '../config/keys';
+import { stripeAPIKeys } from '../../config/keys';
 import Stripe from 'stripe';
-import requireLogin from '../middlewares/requireLogin';
-import billingRouter from './enrichRouter';
+import requireLogin from '../../libs/login/requireLogin';
+import billingRouter from '../../libs/router/enrichRouter';
 
 const stripe = Stripe(stripeAPIKeys.secretKey);
 

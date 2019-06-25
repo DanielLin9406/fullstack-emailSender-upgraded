@@ -1,7 +1,7 @@
-import app from './src/app';
 import http from 'http';
-import server from './src/graphql/apollo';
+import app from './src/app';
+// import server from './src/apollo';
 
-server.applyMiddleware({ app, path: '/graphql' });
+// server.applyMiddleware({ app, path: '/graphql' });
 // Launch http server
 http.createServer(app);
