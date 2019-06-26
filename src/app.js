@@ -21,6 +21,7 @@ app.use(
     keys: [keys.sessionKey.cookieKey]
   })
 );
+
 app.use('/auth', auth.authAPI);
 app.use('/api', user.userAPI);
 app.use('/api', billing.billingAPI);
@@ -29,8 +30,8 @@ app.use('/api', survey.surveyAPI);
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
-      user.userModel.deleteMany({}),
-      models.Message.deleteMany({})
+      user.userModel.deleteMany({})
+      // models.Message.deleteMany({})
     ]);
 
     // createUsersWithMessages();
@@ -54,4 +55,5 @@ connectDb().then(async () => {
   );
 });
 
+export { bodyParser };
 export default app;

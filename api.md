@@ -1,5 +1,5 @@
-get /auth/google
-get /auth/google/callback
+<!-- get /auth/google
+get /auth/google/callback -->
 
 get /api/logout
 get /api/current_user

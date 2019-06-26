@@ -1,5 +1,5 @@
 import passport from 'passport';
-import mongoose from 'mongoose';
+import mongoose from '../db/mongoose';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { googleAPIKeys } from '../../config/keys';
 
