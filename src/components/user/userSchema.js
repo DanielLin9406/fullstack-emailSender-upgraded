@@ -14,8 +14,6 @@ schemaComposer.Query.addFields({
 
 const userSchemaSDL = schemaComposer.buildSchema();
 
-console.log(printSchema(userSchemaSDL));
-
 export { userSchemaSDL };
 export default gql`
   ${printSchema(userSchemaSDL)}
