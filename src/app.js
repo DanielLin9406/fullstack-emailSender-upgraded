@@ -12,9 +12,10 @@ import survey from './components/survey';
 
 const app = express();
 const eraseDatabaseOnSync = false;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors('*'));
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,

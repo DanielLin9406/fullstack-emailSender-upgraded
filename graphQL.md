@@ -26,4 +26,7 @@
 
 ### 關於 GraphQL schema 與 mongoose schema 映射
 
+- 使用 composeWithMongoose 將 mongoose 轉換成 graphql object
+- 再將 graphql object 使用 printschema 轉換成 graphql SDL
+
 ## 加入 subscription

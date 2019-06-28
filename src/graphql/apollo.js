@@ -1,21 +1,12 @@
 import { ApolloServer } from 'apollo-server-express';
-
-import user from '../components/user';
-import billing from '../components/billing';
-import survey from '../components/survey';
-
-const typeDefs = [user.userSchema];
-const resolvers = [user.userResolver];
-const models = {
-  User: user.userModel,
-  Survey: survey.surveyModel
-};
+import { mergedResolvers, mergedTypes, models } from './combined';
 
 const server = new ApolloServer({
   introspection: true,
   playground: true,
-  typeDefs,
-  resolvers,
+  typeDefs: mergedTypes,
+  resolvers: mergedResolvers,
+  uploads: false,
   formatError: error => {
     // remove the internal sequelize error message
     // leave only the important validation error
@@ -31,7 +22,8 @@ const server = new ApolloServer({
   context: ({ req }) => {
     if (req) {
       return {
-        models
+        models,
+        req
       };
     }
   }
