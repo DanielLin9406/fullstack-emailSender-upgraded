@@ -9,6 +9,8 @@ import user from './components/user';
 import auth from './components/auth';
 import billing from './components/billing';
 import survey from './components/survey';
+// Must after Mongoose User schema has been registered.
+import passport from './libs/auth/passport';
 
 const app = express();
 const eraseDatabaseOnSync = false;
@@ -22,6 +24,11 @@ app.use(
     keys: [keys.sessionKey.cookieKey]
   })
 );
+
+// Must after cookieSession
+// Extend passport to app level from router level
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/auth', auth.authAPI);
 app.use('/api', user.userAPI);

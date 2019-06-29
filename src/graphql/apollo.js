@@ -1,11 +1,11 @@
 import { ApolloServer } from 'apollo-server-express';
-import { mergedResolvers, mergedTypes, models } from './combined';
+import { schema, models } from './combined';
 
 const server = new ApolloServer({
   introspection: true,
-  playground: true,
-  typeDefs: mergedTypes,
-  resolvers: mergedResolvers,
+  // 使用apollo server時，開啟以解決使用passport認證存取的問題
+  playground: { settings: { 'request.credentials': 'include' } },
+  schema,
   uploads: false,
   formatError: error => {
     // remove the internal sequelize error message

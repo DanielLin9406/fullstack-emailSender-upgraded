@@ -1,12 +1,5 @@
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
-import { mergedTypes, mergedResolvers, models } from './combined';
-// import mergedSchema from './graphql-compose';
-
-const mergedSchema = makeExecutableSchema({
-  typeDefs: mergedTypes,
-  resolvers: mergedResolvers
-});
+import { schema, models } from './combined';
 
 const connectExpress2GraphQL = function({ app, bodyParser }) {
   app.use(
@@ -20,7 +13,7 @@ const connectExpress2GraphQL = function({ app, bodyParser }) {
     bodyParser.json(),
     graphqlExpress((req, res) => {
       return {
-        schema: mergedSchema,
+        schema,
         context: {
           models,
           req
