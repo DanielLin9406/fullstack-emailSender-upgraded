@@ -16,11 +16,13 @@ const connectExpress2GraphQL = function({ app, bodyParser }) {
         schema,
         context: {
           models,
-          req
+          req,
+          user: req.user
         }
       };
     })
   );
+  return app;
 };
 
 export default connectExpress2GraphQL;

@@ -1,7 +1,7 @@
 export default {
   Query: {
-    currentUser: (parent, arg, { req }) => {
-      return req.user;
+    currentUser: (parent, arg, { user }) => {
+      return user;
     },
     logOut: (parent, arg, { req }) => {
       req.logout();

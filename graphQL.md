@@ -9,6 +9,7 @@
 - 設置 apolloserver
 - 照原先 API 的業務邏輯拆分 query, mutation, 與其他自定義
 - 建立 schema 與 resolver
+- 將 req.body 換成從 mutation 輸入
 - 將 express middleware 寫成 resolver function，並使用 combineResolver 合併使用
 - 測試 api
 - 優化寫入資料庫與暫存

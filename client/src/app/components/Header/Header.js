@@ -4,7 +4,6 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { oneOfType, func, bool, any } from 'prop-types';
 import styled from 'styled-components';
-
 import Payments from '@app/components/Payments/Container';
 
 const List = styled.li`
