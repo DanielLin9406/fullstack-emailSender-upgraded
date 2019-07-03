@@ -1,6 +1,6 @@
 const billingTypeDefs = `
   type Mutation {
-    createCredit: User
+    createCredit(tokenId:String!): User
   }
   `;
 

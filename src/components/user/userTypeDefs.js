@@ -1,7 +1,7 @@
 const userTypeDefs = `
   type Query {
     currentUser: User
-    logOut: Boolean
+    logOut: User
   }
   type User {
     googleId: ID!

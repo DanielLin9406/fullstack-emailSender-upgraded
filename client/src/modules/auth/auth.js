@@ -108,8 +108,8 @@ export const asyncHandleLogout = () => async dispatch => {
   }
 };
 
-export const asyncHandleToken = token => async dispatch => {
-  const res = await axios.post('/api/stripe', token);
+export const asyncHandleToken = tokenId => async dispatch => {
+  const res = await axios.post('/api/stripe', tokenId);
   dispatch({
     type: INIT_AUTH,
     payload: res.data

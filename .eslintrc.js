@@ -7,25 +7,6 @@ module.exports = {
   plugins: ['graphql'],
   // 更改或覆盖添加的规则 off warn error
   rules: {
-    'graphql/template-strings': [
-      'error',
-      {
-        // Import default settings for your GraphQL client. Supported values:
-        // 'apollo', 'relay', 'lokka', 'fraql', 'literal'
-        env: 'relay',
-
-        // Import your schema JSON here
-        schemaJson: require('./schema.json')
-
-        // OR provide absolute path to your schema JSON (but not if using `eslint --cache`!)
-        // schemaJsonFilepath: path.resolve(__dirname, './schema.json'),
-
-        // OR provide the schema in the Schema Language format
-        // schemaString: printSchema(schema),
-
-        // tagName is set for you to Relay.QL
-      }
-    ],
     'linebreak-style': 'off', // Don't play nicely with Windows.
     'arrow-parens': 'off', // Incompatible with prettier
     'object-curly-newline': 'off', // Incompatible with prettier

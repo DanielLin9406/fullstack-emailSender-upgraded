@@ -8,6 +8,8 @@ import createStore from './store';
 import App from './app/App';
 import './index.scss';
 
+window.axios = axios;
+
 const { store } = createStore();
 const root = document.querySelector('#root');
 const Application = (

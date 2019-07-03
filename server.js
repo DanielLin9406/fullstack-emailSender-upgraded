@@ -8,4 +8,4 @@ http.createServer(connectExpress2GraphQL({ app, bodyParser }));
 
 // Method:2 Launch apollo server with express
 // server.applyMiddleware({ app, path: '/graphql' });
-http.createServer(app);
+// http.createServer(app);

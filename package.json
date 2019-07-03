@@ -11,12 +11,12 @@
     "start": "NODE_ENV=production node server.js",
     "server": "nodemon --exec babel-node server.js",
     "client": "npm start --prefix ./client/",
+    "test": "mocha --opts ./mocha.opts 'src/components/**/test/**.spec.js' --exit",
     "lint": "eslint src/",
     "lint:write": "eslint --debug src/ --fix",
     "prettier": "prettier --write src/",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "dev-webhook": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install -D webpack-cli && npm install --prefix client && npm run heroku:build --prefix client",
     "webhook": "./sendgrid_webhook.sh anfoweinf343434"
   },
@@ -24,6 +24,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.4.5",
     "@sendgrid/mail": "^6.3.1",
     "apollo-server": "^2.6.7",
     "apollo-server-express": "^2.6.4",
@@ -51,10 +52,24 @@
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
+    "assert": "^2.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "concurrently": "^4.1.0",
+    "cookie-parser": "^1.4.4",
     "eslint-plugin-graphql": "^3.0.3",
-    "nodemon": "^1.18.10"
+    "keygrip": "^1.1.0",
+    "lodash.noop": "^3.0.1",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.18.10",
+    "npm": "^6.9.2",
+    "passport-local": "^1.0.0",
+    "safe-buffer": "^5.1.2",
+    "superagent": "^5.1.0",
+    "superagent-graphql": "^0.1.2",
+    "supertest": "^4.0.2"
   }
 }

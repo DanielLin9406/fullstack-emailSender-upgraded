@@ -1,3 +1,4 @@
+import Stripe from 'stripe';
 import { combineResolvers } from 'graphql-resolvers';
 import { isAuthenticated } from '../../libs/auth/authResolver';
 import { stripeAPIKeys } from '../../config/keys';

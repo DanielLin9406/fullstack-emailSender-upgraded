@@ -12,6 +12,7 @@ const connectExpress2GraphQL = function({ app, bodyParser }) {
     '/graphql',
     bodyParser.json(),
     graphqlExpress((req, res) => {
+      // console.log('req', req._passport.session);
       return {
         schema,
         context: {
