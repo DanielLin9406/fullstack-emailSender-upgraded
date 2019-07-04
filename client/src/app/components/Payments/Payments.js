@@ -26,7 +26,6 @@ class Payments extends Component {
         description="$5 for 5 emails credits"
         amount={500} // $5
         token={token => {
-          console.log(token);
           return this.props.asyncHandleToken({ id: token.id });
         }}
         stripeKey={app.env.STRIPE_PUB_KEY}
