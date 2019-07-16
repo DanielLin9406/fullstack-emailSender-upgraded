@@ -1,11 +1,8 @@
 import merge from 'webpack-merge';
 import path from 'path';
-import webpack from 'webpack';
-import stringify from 'stringify-object-values';
 // import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 
 import commonConfig from './webpack.config.common';
-import env from './webpack.env';
 
 const devConfig = {
   mode: 'development',
@@ -62,7 +59,6 @@ const devConfig = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin(stringify(env.variables))
     // new OpenBrowserPlugin({ url:'http://localhost:8080' })
   ],
   devServer: {
@@ -77,11 +73,11 @@ const devConfig = {
   }
 };
 
-export default merge({
-  customizeArray(a, b, key) {
-    if (key === 'entry.index') {
-      return b;
-    }
-    return undefined;
-  }
-})(commonConfig, devConfig);
+export default merge(commonConfig, devConfig);
+
+// customizeArray(a, b, key) {
+//   if (key === 'entry.index') {
+//     return b;
+//   }
+//   return undefined;
+// }

@@ -1,6 +1,4 @@
 import merge from 'webpack-merge';
-import webpack from 'webpack';
-import stringify from 'stringify-object-values';
 
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -9,7 +7,6 @@ import WebpackAssetsManifest from 'webpack-assets-manifest';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
 import commonConfig from './webpack.config.common';
-import env from './webpack.env';
 import { paths } from './webpack.const';
 
 const publicConfig = {
@@ -62,7 +59,6 @@ const publicConfig = {
   },
   plugins: [
     new CleanWebpackPlugin(['build']),
-    new webpack.DefinePlugin(stringify(env.variables)),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[hash].css',
       chunkFilename: 'static/css/[name].[hash].css',

@@ -1,5 +1,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import stringify from 'stringify-object-values';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import webpack from 'webpack';
 import env from './webpack.env';
 import { paths } from './webpack.const';
@@ -73,11 +75,11 @@ const commonConfig = {
       name: 'manifest'
     },
     splitChunks: {
+      chunks: 'initial',
       cacheGroups: {
-        commons: {
+        vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all'
+          name: 'vendor'
         }
       }
     }
@@ -87,7 +89,9 @@ const commonConfig = {
       filename: 'index.html',
       template: paths.appHtml
     }),
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.DefinePlugin(stringify(env.variables)),
+    new webpack.HashedModuleIdsPlugin(),
+    new BundleAnalyzerPlugin()
   ],
   resolve: {
     alias: {
