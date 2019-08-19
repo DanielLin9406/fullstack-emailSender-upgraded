@@ -32,10 +32,10 @@ function bindEventOnIo(io) {
   });
 }
 
-const bindSockIo = activedServer => {
+const activateSocketIo = activedServer => {
   const io = initSocketIo(activedServer);
   bindEventOnIo(io);
   return activedServer;
 };
 
-export default bindSockIo;
+export default activateSocketIo;
