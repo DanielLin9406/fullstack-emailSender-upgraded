@@ -5,7 +5,7 @@ const ENV = process.env.NODE_ENV || 'development';
 
 const VARIABLES = {
   DEBUGGING: false,
-  MONITORING: false,
+  MONITORING: true,
   ENVIRONMENT_NAME: ENV,
   VERSION: packageJSON.version,
   GAPI_CLIENT_ID:
@@ -17,7 +17,6 @@ const ENV_VARIABLES = {
     'process.env.NODE_ENV': 'production',
     'app.env': {
       ...VARIABLES,
-      MONITORING: true,
       STRIPE_PUB_KEY: pubKey.stripe[process.env.NODE_ENV],
       PG_INTERNAL_API_URL: url.pgInternalApiUrl[process.env.NODE_ENV_API]
     }
@@ -26,7 +25,6 @@ const ENV_VARIABLES = {
     'process.env.NODE_ENV': 'development',
     'app.env': {
       ...VARIABLES,
-      MONITORING: true,
       STRIPE_PUB_KEY: pubKey.stripe[process.env.NODE_ENV],
       PG_INTERNAL_API_URL: url.pgInternalApiUrl[process.env.NODE_ENV_API]
     }
