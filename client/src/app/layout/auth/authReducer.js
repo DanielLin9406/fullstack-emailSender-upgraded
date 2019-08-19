@@ -1,21 +1,11 @@
 import axios from 'axios';
-/*
- * define action name
- */
 
-/*
- * define async action name
- */
 export const INIT_AUTH = 'INIT_AUTH';
 export const RELOAD_AUTH = 'RELOAD_AUTH';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
-
-/*
- * state init (scheduledPrice in redux)
- */
 
 export const initialState = {
   initialized: false,
@@ -24,10 +14,7 @@ export const initialState = {
   error: undefined
 };
 
-/*
- * auth reducer
- */
-export default (state = initialState, action) => {
+export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case INIT_AUTH:
       return Object.assign({}, state, {
@@ -60,17 +47,9 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
-/*
- * export sync packaged dispatch
- */
-
-/*
- * export async packaged dispatch
- */
-
-export const asyncInitAuthUser = () => async dispatch => {
+const createAsyncInitAuthUser = dispatch => async () => {
   const res = await axios.get('/api/current_user');
   dispatch({
     type: INIT_AUTH,
@@ -78,9 +57,17 @@ export const asyncInitAuthUser = () => async dispatch => {
   });
 };
 
-export const asyncHandleLogin = token => async dispatch => {
+const createAsyncReloadAuthUser = dispatch => async () => {
+  const res = await axios.get('/api/current_user');
+  dispatch({
+    type: RELOAD_AUTH,
+    payload: res.data
+  });
+};
+
+const createAsyncHandleLogin = dispatch => async () => {
   try {
-    const res = await axios.post('/api/stripe', token);
+    const res = await axios.get('/auth/google');
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
@@ -93,7 +80,7 @@ export const asyncHandleLogin = token => async dispatch => {
   }
 };
 
-export const asyncHandleLogout = () => async dispatch => {
+const createAsyncHandleLogout = dispatch => async () => {
   try {
     const res = await axios.get('/api/logout');
     dispatch({
@@ -108,15 +95,17 @@ export const asyncHandleLogout = () => async dispatch => {
   }
 };
 
-export const asyncHandleToken = tokenId => async dispatch => {
-  const res = await axios.post('/api/stripe', tokenId);
+// //TODO 修改到stripe
+const createAsyncHandleToken = dispatch => async token => {
+  const res = await axios.post('/api/stripe', token);
   dispatch({
     type: INIT_AUTH,
     payload: res.data
   });
 };
 
-export const asyncSubmitSurvey = (values, history) => async dispatch => {
+// //TODO 修改到survey
+const createAsyncSubmitSurvey = dispatch => async (values, history) => {
   const res = await axios.post('/api/surveys', values);
   history.push('/surveys');
   dispatch({
@@ -124,3 +113,14 @@ export const asyncSubmitSurvey = (values, history) => async dispatch => {
     payload: res.data
   });
 };
+
+const createFunction = {
+  createAsyncInitAuthUser,
+  createAsyncReloadAuthUser,
+  createAsyncHandleLogin,
+  createAsyncHandleLogout,
+  createAsyncHandleToken,
+  createAsyncSubmitSurvey
+};
+
+export { createFunction };

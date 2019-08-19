@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
+import React from 'react';
 // import logo from '@app/image/data.png';
 import { Link } from 'react-router-dom';
 import SurveyList from '@app/components/SurveyList/Container';
 import HelmetLayout from '../../layout/helmet/HelmetLayout';
 import OneColLayout from '../../layout/oneCol/OneColLayout';
+import SurveyProvider from '../../layout/survey/SurveyProvider';
 
-class Survey extends Component {
-  render() {
-    return (
+function SurveyPage() {
+  return (
+    <SurveyProvider>
       <HelmetLayout>
         <OneColLayout>
           <h3>Survey Dashboard</h3>
-          {/* <img src={logo}></img> */}
           <SurveyList />
           <div className="fixed-action-btn">
             <Link
@@ -24,8 +23,8 @@ class Survey extends Component {
           </div>
         </OneColLayout>
       </HelmetLayout>
-    );
-  }
+    </SurveyProvider>
+  );
 }
 
-export default hot(module)(Survey);
+export default SurveyPage;

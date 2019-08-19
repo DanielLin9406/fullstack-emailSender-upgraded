@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
 import Helmet from 'react-helmet';
 import seo from '@app/const/const';
 import { any, string, shape } from 'prop-types';
 
-class HelmetLayout extends Component {
-  static propTypes = {
-    children: shape({}),
-    location: any,
-    className: string,
-    id: string
-  };
-
-  getAttrs = rest => ({
+function HelmetLayout(props) {
+  const getAttrs = rest => ({
     lang: 'en',
     itemscope: undefined,
     itemtype: `http://schema.org/${rest.schema || 'WebPage'}`
   });
 
-  getTitle = rest =>
+  const getTitle = rest =>
     rest.title
       ? rest.title + seo.defaultSep + seo.defaultTitle
       : seo.defaultTitle;
 
-  getLinks = (a, pathname) => [
+  const getLinks = (a, pathname) => [
     {
       rel: 'canonical',
       href: seo.SITE_URL + pathname
     }
   ];
 
-  getMetaTags({
+  const getMetaTags = ({
     title,
     description,
     image,
@@ -39,7 +32,7 @@ class HelmetLayout extends Component {
     updated,
     category,
     tags
-  }) {
+  }) => {
     const theTitle = title
       ? (title + seo.defaultSep + seo.defaultTitle).substring(0, 60)
       : seo.defaultTitle;
@@ -85,23 +78,28 @@ class HelmetLayout extends Component {
     }
 
     return metaTags;
-  }
+  };
 
-  render() {
-    const { children, id, className, ...rest } = this.props;
+  const { children, ...rest } = props;
 
-    return (
-      <main id={id} className={className}>
-        <Helmet
-          htmlAttributes={this.getAttrs(rest)}
-          title={this.getTitle(rest)}
-          link={this.getLinks(rest, this.props.location.pathname)}
-          meta={this.getMetaTags(rest, this.props.location.pathname)}
-        />
-        {children}
-      </main>
-    );
-  }
+  return (
+    <>
+      <Helmet
+        htmlAttributes={getAttrs(rest)}
+        title={getTitle(rest)}
+        link={getLinks(rest, props.location.pathname)}
+        meta={getMetaTags(rest, props.location.pathname)}
+      />
+      {children}
+    </>
+  );
 }
+
+HelmetLayout.propTypes = {
+  children: shape({}),
+  location: any,
+  className: string,
+  id: string
+};
 
 export default withRouter(HelmetLayout);

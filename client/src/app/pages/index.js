@@ -32,7 +32,7 @@ const pagesInfo = [
         import(/* webpackChunkName: "surveynew" */ './SurveyNew/Container'),
       modules: ['surveynew']
     }),
-    authType: 'authed'
+    authType: 'general'
   }
 ];
 

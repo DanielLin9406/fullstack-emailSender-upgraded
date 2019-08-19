@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
+import React, { useState } from 'react';
 
 import {
   SurveyForm,
-  ConnectedSurveyFormReview
+  SurveyFormReview
 } from '@app/components/SurveyForm/Container';
 import {
   validateBody,
@@ -13,6 +12,7 @@ import {
 } from '@app/shared/validateForm';
 import HelmetLayout from '../../layout/helmet/HelmetLayout';
 import OneColLayout from '../../layout/oneCol/OneColLayout';
+import SurveyProvider from '../../layout/survey/SurveyProvider';
 
 const FIELDS = [
   {
@@ -45,40 +45,37 @@ const FIELDS = [
   }
 ];
 
-class SurveyNew extends Component {
-  state = {
-    showFormReview: false,
-    userFormData: null
-  };
-
-  renderContent() {
-    if (this.state.showFormReview) {
+function SurveyNewPage() {
+  const [showFormReview, setShowFormReview] = useState(false);
+  const [userFormData, setUserFormData] = useState(null);
+  const renderContent = () => {
+    if (showFormReview) {
       return (
-        <ConnectedSurveyFormReview
-          onCancel={() => this.setState({ showFormReview: false })}
-          userFormData={this.state.userFormData}
+        <SurveyFormReview
+          onCancel={() => setShowFormReview(false)}
+          userFormData={userFormData}
           fieldsData={FIELDS}
         />
       );
     }
     return (
       <SurveyForm
-        onSurveySubmit={() => this.setState({ showFormReview: true })}
-        onSaveUserFormData={data => this.setState({ userFormData: data })}
-        onResetForm={() => this.setState({ userFormData: null })}
-        userFormData={this.state.userFormData}
+        onSurveySubmit={() => setShowFormReview(true)}
+        onSaveUserFormData={data => setUserFormData(data)}
+        onResetForm={() => setUserFormData(null)}
+        userFormData={userFormData}
         fieldsData={FIELDS}
       />
     );
-  }
+  };
 
-  render() {
-    return (
+  return (
+    <SurveyProvider>
       <HelmetLayout>
-        <OneColLayout>{this.renderContent()}</OneColLayout>
+        <OneColLayout>{renderContent()}</OneColLayout>
       </HelmetLayout>
-    );
-  }
+    </SurveyProvider>
+  );
 }
 
-export default hot(module)(SurveyNew);
+export default SurveyNewPage;

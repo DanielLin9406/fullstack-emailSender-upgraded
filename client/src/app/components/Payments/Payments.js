@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import noop from 'lodash/noop';
-import { func } from 'prop-types';
+import React, { useContext } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import styled from 'styled-components';
+import AuthContext from '../../layout/auth/AuthContext';
 
 const Button = styled.button`
   &:hover {
@@ -10,30 +9,21 @@ const Button = styled.button`
   }
 `;
 
-class Payments extends Component {
-  static propTypes = {
-    asyncHandleToken: func
-  };
+function Payments() {
+  const { dispatch, createAsyncHandleToken } = useContext(AuthContext);
+  const asyncHandleToken = createAsyncHandleToken(dispatch);
 
-  static defaultProps = {
-    asyncHandleToken: noop
-  };
-
-  render() {
-    return (
-      <StripeCheckout
-        name="Emaily"
-        description="$5 for 5 emails credits"
-        amount={500} // $5
-        token={token => {
-          return this.props.asyncHandleToken({ id: token.id });
-        }}
-        stripeKey={app.env.STRIPE_PUB_KEY}
-      >
-        <Button className="btn black">Add Credits</Button>
-      </StripeCheckout>
-    );
-  }
+  return (
+    <StripeCheckout
+      name="Emaily"
+      description="$5 for 5 emails credits"
+      amount={500} // $5
+      token={token => asyncHandleToken(token)}
+      stripeKey={app.env.STRIPE_PUB_KEY}
+    >
+      <Button className="btn black">Add Credits</Button>
+    </StripeCheckout>
+  );
 }
 
 export default Payments;

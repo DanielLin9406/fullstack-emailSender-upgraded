@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import noop from 'lodash/noop';
-import { hot } from 'react-hot-loader';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { oneOfType, func, bool, any } from 'prop-types';
 import styled from 'styled-components';
 import Payments from '@app/components/Payments/Container';
+import AuthContext from '../../layout/auth/AuthContext';
 
 const List = styled.li`
   margin: 0 5px;
@@ -18,26 +16,31 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-class Header extends Component {
-  static propTypes = {
-    asyncInitAuthUser: func,
-    user: oneOfType([bool, any])
+function Header() {
+  const {
+    authenticated,
+    initialized,
+    user,
+    dispatch,
+    createAsyncInitAuthUser,
+    createAsyncHandleLogout
+  } = useContext(AuthContext);
+  const asyncInitAuthUser = createAsyncInitAuthUser(dispatch);
+  const asyncHandleLogout = createAsyncHandleLogout(dispatch);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await asyncInitAuthUser();
+    };
+    if (!initialized) fetchData();
+  }, []);
+
+  const handleLogout = async () => {
+    await asyncHandleLogout();
   };
 
-  static defaultProps = {
-    asyncInitAuthUser: noop
-  };
-
-  componentDidMount() {
-    this.props.asyncInitAuthUser();
-  }
-
-  handleLogout() {
-    this.props.asyncHandleLogout();
-  }
-
-  renderContent() {
-    switch (this.props.authenticated) {
+  const renderContent = () => {
+    switch (authenticated) {
       case null:
         return;
       case false:
@@ -51,33 +54,24 @@ class Header extends Component {
           <List key="1">
             <Payments />
           </List>,
-          this.props.authenticated ? (
-            <List key="3">Credits: {this.props.user.credits}</List>
-          ) : (
-            ''
-          ),
-          <List key="2">
-            <Button onClick={() => this.handleLogout()}>Logout</Button>
+          authenticated ? <List key="2">Credits: {user.credits}</List> : '',
+          <List key="3">
+            <Button onClick={() => handleLogout()}>Logout</Button>
           </List>
         ];
     }
-  }
+  };
 
-  render() {
-    return (
-      <nav>
-        <div className="nav-wrapper">
-          <Link
-            to={this.props.user ? '/surveys' : '/'}
-            className="left brand-logo"
-          >
-            Emaily
-          </Link>
-          <ul className="right">{this.renderContent()}</ul>
-        </div>
-      </nav>
-    );
-  }
+  return (
+    <nav>
+      <div className="nav-wrapper">
+        <Link to={user ? '/surveys' : '/'} className="left brand-logo">
+          Emaily
+        </Link>
+        <ul className="right">{renderContent()}</ul>
+      </div>
+    </nav>
+  );
 }
 
-export default hot(module)(Header);
+export default Header;

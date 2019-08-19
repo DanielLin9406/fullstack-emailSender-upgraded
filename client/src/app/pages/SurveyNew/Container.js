@@ -1,3 +1,3 @@
-import SurveyNew from './SurveyNew';
+import SurveyNewPage from './SurveyNewPage';
 
-export default SurveyNew;
+export default SurveyNewPage;

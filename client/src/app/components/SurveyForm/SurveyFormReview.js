@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { func, arr } from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { withRouter } from 'react-router';
+import AuthContext from '../../layout/auth/AuthContext';
 
-const SurveyFormReview = ({
-  onCancel,
-  userFormData,
-  fieldsData,
-  asyncSubmitSurvey,
-  history
-}) => {
+const SurveyFormReview = ({ onCancel, userFormData, fieldsData, history }) => {
+  const { dispatch, createAsyncSubmitSurvey } = useContext(AuthContext);
+  const asyncSubmitSurvey = createAsyncSubmitSurvey(dispatch);
+
   return (
     <div>
       <h4>Confirm your form entity.</h4>
@@ -17,7 +14,7 @@ const SurveyFormReview = ({
         fieldsData.map(field => {
           return (
             <div key={field.name}>
-              <label htmlFor>{field.label}</label>
+              <label htmlFor="true">{field.label}</label>
               <div>{userFormData[field.name]}</div>
             </div>
           );
@@ -40,12 +37,10 @@ const SurveyFormReview = ({
 };
 
 SurveyFormReview.propTypes = {
-  asyncSubmitSurvey: func,
   onCancel: func,
   userFormData: arr,
   fieldsData: arr,
   history: arr
 };
-//
 
-export default hot(module)(withRouter(SurveyFormReview));
+export default withRouter(SurveyFormReview);

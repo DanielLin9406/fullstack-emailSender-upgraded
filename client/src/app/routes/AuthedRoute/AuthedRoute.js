@@ -1,19 +1,21 @@
-import React from 'react';
-import { any } from 'prop-types';
+import React, { useContext } from 'react';
+// import { any } from 'prop-types';
 import { paths } from '@app/pages';
 import RouteUnit from '../RouteUnit/Container';
+import AuthContext from '../../layout/auth/AuthContext';
 
-const AuthedRoute = ({ authenticated, ...props }) => {
+const AuthedRoute = ({ ...props }) => {
+  const { authenticated } = useContext(AuthContext);
   return (
     <RouteUnit
       {...props}
-      predicate={() => authenticated}
+      predicate={() => authenticated === true}
       fallbackPath={paths.LANDING}
     />
   );
 };
-AuthedRoute.propTypes = {
-  authenticated: any
-};
+// AuthedRoute.propTypes = {
+//   authenticated: any
+// };
 
 export default AuthedRoute;

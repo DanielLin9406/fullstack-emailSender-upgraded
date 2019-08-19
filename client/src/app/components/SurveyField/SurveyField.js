@@ -17,7 +17,7 @@ const ErrMsg = styled.div`
 const SurveyField = ({ label, error, touched, ...props }) => {
   return (
     <div>
-      <label htmlFor>{label}</label>
+      <label htmlFor="true">{label}</label>
       <FieldCon>
         <Field {...props} />
       </FieldCon>

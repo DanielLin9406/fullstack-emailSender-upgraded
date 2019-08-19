@@ -1,19 +1,15 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 import RouteUnit from '../RouteUnit/Container';
-import HelmetLayout from '../../layout/helmet/HelmetLayout';
 
 const BaseRoute = ({ ...props }) => {
   return (
-    <HelmetLayout>
-      <RouteUnit
-        {...props}
-        predicate={() => {
-          return true;
-        }}
-      />
-    </HelmetLayout>
+    <RouteUnit
+      {...props}
+      predicate={() => {
+        return true;
+      }}
+    />
   );
 };
 
-export default hot(module)(BaseRoute);
+export default BaseRoute;

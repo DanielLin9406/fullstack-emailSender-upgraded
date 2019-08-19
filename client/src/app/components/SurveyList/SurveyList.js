@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
-import { oneOfType, func, bool, array, object } from 'prop-types';
+import React, { useEffect, useContext } from 'react';
+import SurveyContext from '../../layout/survey/SurveyContext';
 
-class SurveyList extends Component {
-  static propTypes = {
-    asyncFetchSurveys: func,
-    survey: oneOfType([array]),
-    user: oneOfType([bool, object])
-  };
+function SurveyList() {
+  const { createAsyncFetchSurveys, survey, dispatch } = useContext(
+    SurveyContext
+  );
+  const asyncFetchSurveys = createAsyncFetchSurveys(dispatch);
 
-  componentDidMount() {
-    this.props.asyncFetchSurveys();
-  }
+  useEffect(() => {
+    asyncFetchSurveys();
+  }, []);
 
-  renderSurvey() {
-    return this.props.survey.reverse().map(surveyItem => {
+  const renderSurvey = () => {
+    return survey.reverse().map(surveyItem => {
       return (
         <div className="card darken-1" key={surveyItem._id}>
           <div className="card-content">
@@ -25,17 +23,14 @@ class SurveyList extends Component {
             </p>
           </div>
           <div className="card-action">
-            <p>Yes: {surveyItem.yes}</p>
-            <p>No: {surveyItem.no}</p>
+            <a href="true">Yes: {surveyItem.yes}</a>
+            <a href="true">No: {surveyItem.no}</a>
           </div>
         </div>
       );
     });
-  }
-
-  render() {
-    return <div>{this.renderSurvey()}</div>;
-  }
+  };
+  return <div>{renderSurvey()}</div>;
 }
 
-export default hot(module)(SurveyList);
+export default SurveyList;
