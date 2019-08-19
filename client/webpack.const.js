@@ -27,7 +27,8 @@ const url = {
     production: 'https://intrapi.positivegrid.com/v2',
     stage: 'https://pg-beta-intrapi.herokuapp.com/v2',
     apiDoc: 'http://localhost:7000/v2',
-    jsonserver: 'http://localhost:8090'
+    jsonserver: 'http://localhost:8090',
+    dev: 'http://localhost:5000'
   }
 };
 

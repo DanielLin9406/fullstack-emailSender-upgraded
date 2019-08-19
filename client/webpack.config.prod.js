@@ -40,8 +40,9 @@ const publicConfig = {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              modules: false,
-              localIdentName: '[local]-[hash:base64:5]'
+              modules: {
+                localIdentName: '[local]-[hash:base64:5]'
+              }
             }
           },
           {

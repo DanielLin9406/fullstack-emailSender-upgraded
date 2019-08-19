@@ -1,0 +1,11 @@
+build:
+  docker:
+    client: client/Dockerfile
+    api: api/Dockerfile
+run:
+  client:
+    command:
+      - npm run server:prod
+  api:
+    command:
+      - npm run prod

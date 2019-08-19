@@ -1,17 +1,19 @@
-FROM node:8.16.0-jessie
+FROM node:10.16.0-jessie
 
 LABEL maintainer_email="universetennis@gmail.com"
 LABEL maintainer="daniel"
 
 RUN npm i -g npm@5.6.0
 RUN useradd --user-group --create-home --shell /bin/bash app
-RUN mkdir -p /home/node-backend/node_modules
-RUN chown -R app:app /home/node-backend/
+RUN mkdir -p /home/api/node_modules
+RUN chown -R app:app /home/api/
 
 USER app
-WORKDIR /home/node-backend
-COPY package*.json /home/node-backend/
+WORKDIR /home/api
+COPY package*.json ./
 RUN npm install
+COPY . .
+RUN npm run build
 
 EXPOSE 5000
-CMD ["npm", "start"]
+CMD ["npm", "run", "prod"]

@@ -1,4 +1,4 @@
-FROM node:8.16.0-jessie
+FROM node:10.16.0-jessie
 
 LABEL maintainer_email="universetennis@gmail.com"
 LABEL maintainer="daniel"
@@ -13,6 +13,9 @@ USER app
 WORKDIR /home/node-frontend
 COPY package*.json /home/node-frontend/
 RUN npm install
+COPY . .
+RUN npm run build:prod
+RUN npm run server:prod
 
 EXPOSE 8080
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "server:prod"]

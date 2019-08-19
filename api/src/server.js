@@ -1,7 +1,7 @@
 import http from 'http';
-import app, { bodyParser } from './src/app';
-import server from './src/graphql/apollo';
-import connectExpress2GraphQL from './src/graphql/graphqlExpress';
+import app, { bodyParser } from './app';
+import server from './graphql/apollo';
+import connectExpress2GraphQL from './graphql/graphqlExpress';
 
 // Method:1 Launch express server with express-graphql
 http.createServer(connectExpress2GraphQL({ app, bodyParser }));

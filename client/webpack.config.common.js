@@ -1,7 +1,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import stringify from 'stringify-object-values';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import webpack from 'webpack';
 import env from './webpack.env';
 import { paths } from './webpack.const';
@@ -90,8 +90,7 @@ const commonConfig = {
       template: paths.appHtml
     }),
     new webpack.DefinePlugin(stringify(env.variables)),
-    new webpack.HashedModuleIdsPlugin(),
-    new BundleAnalyzerPlugin()
+    new webpack.HashedModuleIdsPlugin()
   ],
   resolve: {
     alias: {

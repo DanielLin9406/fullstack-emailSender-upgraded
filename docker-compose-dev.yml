@@ -1,0 +1,32 @@
+version: "3"
+services:
+  api:
+    build:
+      dockerfile: docker-dev.dockerfile
+      context: ./api
+    image: api
+    volumes:
+      - .:/home/api/
+      - /home/api/node_modules
+    env_file:
+      - ./api/.env
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 5000:5000
+    command: npm run server
+  client:
+    build:
+      dockerfile: docker-dev.dockerfile
+      context: ./client
+    image: client
+    env_file:
+      - ./client/.env
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./client:/home/client/
+      - /home/client/node_modules
+    ports:
+      - 8080:8080
+    command: npm run start:dev
