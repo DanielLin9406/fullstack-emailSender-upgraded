@@ -6,12 +6,12 @@ LABEL maintainer="daniel"
 RUN npm i -g npm@5.6.0
 RUN npm i -g npx
 RUN useradd --user-group --create-home --shell /bin/bash app
-RUN mkdir -p /home/node-frontend/node_modules
-RUN chown -R app:app /home/node-frontend/
+RUN mkdir -p /home/client/node_modules
+RUN chown -R app:app /home/client/
 
 USER app
-WORKDIR /home/node-frontend
-COPY package*.json /home/node-frontend/
+WORKDIR /home/client
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build:prod

@@ -21,22 +21,33 @@ const paths = {
   appHtml: path.join(rootDir, 'src/assets/templates/index.html'),
   webpackVisualizerHtml: 'report/webpack-visualizer.html'
 };
-const url = {
-  servedUrl: '/',
-  pgInternalApiUrl: {
-    production: 'https://intrapi.positivegrid.com/v2',
-    stage: 'https://pg-beta-intrapi.herokuapp.com/v2',
-    apiDoc: 'http://localhost:7000/v2',
-    jsonserver: 'http://localhost:8090',
-    dev: 'http://localhost:5000'
-  }
+
+const API_HOST = {
+  production: '',
+  stage: '',
+  jsonserver: 'localhost',
+  dev: 'localhost'
+};
+
+const API_PORT = {
+  production: '',
+  stage: '',
+  jsonserver: '8090',
+  dev: '5000'
+};
+
+const API_VER = {
+  production: 'v1',
+  stage: 'v1',
+  jsonserver: 'v1',
+  dev: 'v1'
 };
 
 const pubKey = {
   stripe: {
-    production: 'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE',
-    development: 'pk_test_PjuoNpPOVWYdA2izgIRyuIlz00l2VBCmnE'
+    production: process.env.STRIPE_PUB_KEY_PROD,
+    development: process.env.STRIPE_PUB_KEY_DEV
   }
 };
 
-export { paths, url, pubKey };
+export { paths, pubKey, API_HOST, API_PORT, API_VER };

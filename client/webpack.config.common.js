@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import stringify from 'stringify-object-values';
