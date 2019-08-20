@@ -3,14 +3,22 @@ import axios from 'axios';
 export const FETCH_SURVEYS = 'fetch_surveys';
 
 export const initialState = {
-  survey: []
+  survey: [],
+  loadingPromise: undefined,
+  loading: false
 };
 
 export default function surveyReducer(state = initialState, action) {
   switch (action.type) {
+    case 'LOAD_LIST':
+      return Object.assign({}, state, {
+        loadingPromise: action.loadingPromise,
+        loading: true
+      });
     case FETCH_SURVEYS:
       return Object.assign({}, state, {
-        survey: action.payload || false
+        survey: action.payload || false,
+        loading: false
       });
     default:
       return state;
@@ -18,7 +26,8 @@ export default function surveyReducer(state = initialState, action) {
 }
 
 const createAsyncFetchSurveys = dispatch => async () => {
-  const res = await axios.get('/api/surveys');
+  const request = axios.get('/api/surveys');
+  const res = await request;
   dispatch({
     type: FETCH_SURVEYS,
     payload: res.data

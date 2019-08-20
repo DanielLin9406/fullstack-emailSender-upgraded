@@ -1,18 +1,34 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useMemo, useContext } from 'react';
 import SurveyContext from '../../layout/survey/SurveyContext';
 
-function SurveyList() {
-  const { createAsyncFetchSurveys, survey, dispatch } = useContext(
-    SurveyContext
-  );
+function readSurveyList() {
+  const {
+    createAsyncFetchSurveys,
+    survey,
+    loadingPromise,
+    loading,
+    dispatch
+  } = useContext(SurveyContext);
   const asyncFetchSurveys = createAsyncFetchSurveys(dispatch);
 
-  useEffect(() => {
-    asyncFetchSurveys();
-  }, []);
+  const cacheSurvey = useMemo(() => survey, [survey]);
 
+  const loaded = loadingPromise && !loading;
+  if (loaded) return cacheSurvey;
+  if (loadingPromise) throw loadingPromise;
+
+  const promise = asyncFetchSurveys();
+  dispatch({
+    type: 'LOAD_LIST',
+    loadingPromise: promise
+  });
+  throw promise;
+}
+
+function SurveyListView() {
+  const surveyList = readSurveyList();
   const renderSurvey = () => {
-    return survey.reverse().map(surveyItem => {
+    return surveyList.reverse().map(surveyItem => {
       return (
         <div className="card darken-1" key={surveyItem._id}>
           <div className="card-content">
@@ -33,4 +49,4 @@ function SurveyList() {
   return <div>{renderSurvey()}</div>;
 }
 
-export default SurveyList;
+export default SurveyListView;

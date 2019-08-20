@@ -8,7 +8,13 @@ import { sendGridAPIKeys } from '../../config/keys';
 import requireCredits from '../../libs/credit/requireCredits';
 import surveyTemplate from '../../libs/email/surveyTemplate';
 
-surveyRouter.get('/surveys', requireLogin, async (req, res) => {
+function delayRes(req, res, next) {
+  setTimeout(() => {
+    next();
+  }, 5000);
+}
+
+surveyRouter.get('/surveys', requireLogin, delayRes, async (req, res) => {
   const surveys = await Survey.find({
     _user: req.user.id
   }).select({

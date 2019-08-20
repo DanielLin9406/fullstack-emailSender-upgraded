@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 // import logo from '@app/image/data.png';
 import { Link } from 'react-router-dom';
-import SurveyList from '@app/components/SurveyList/Container';
+import SurveyListView from '@app/components/SurveyList/Container';
 import HelmetLayout from '../../layout/helmet/HelmetLayout';
 import OneColLayout from '../../layout/oneCol/OneColLayout';
 import SurveyProvider from '../../layout/survey/SurveyProvider';
@@ -12,7 +12,9 @@ function SurveyPage() {
       <HelmetLayout>
         <OneColLayout>
           <h3>Survey Dashboard</h3>
-          <SurveyList />
+          <Suspense fallback={<div>Loading </div>}>
+            <SurveyListView />
+          </Suspense>
           <div className="fixed-action-btn">
             <Link
               to="/surveys/new"
