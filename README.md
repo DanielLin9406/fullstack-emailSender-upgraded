@@ -1,5 +1,7 @@
 # backend-scaffold-node-mongodb
 
+[![Build Status](https://travis-ci.org/DanielLin9406/fullstack-emailSender-upgraded.svg?branch=master)](https://travis-ci.org/DanielLin9406/fullstack-emailSender-upgraded)
+
 ## Installation
 
 ### Prerequisite
