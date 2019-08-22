@@ -8,7 +8,7 @@ import { sendGridAPIKeys } from '../../config/keys';
 import requireCredits from '../../libs/credit/requireCredits';
 import surveyTemplate from '../../libs/email/surveyTemplate';
 
-surveyRouter.get('/surveys', requireLogin, async (req, res) => {
+surveyRouter.get('/api/surveys', requireLogin, async (req, res) => {
   const surveys = await Survey.find({
     _user: req.user.id
   }).select({
@@ -17,11 +17,11 @@ surveyRouter.get('/surveys', requireLogin, async (req, res) => {
   res.send(surveys);
 });
 
-surveyRouter.get('/surveys/:surveyId/:choice', (req, res) => {
+surveyRouter.get('/api/surveys/:surveyId/:choice', (req, res) => {
   res.send('Thanks for voting');
 });
 
-surveyRouter.post('/surveys/webhooks', (req, res) => {
+surveyRouter.post('/api/surveys/webhooks', (req, res) => {
   const uniqBy = (arr, predicate) => {
     const cb = typeof predicate === 'function' ? predicate : o => o[predicate];
     return [
@@ -34,7 +34,7 @@ surveyRouter.post('/surveys/webhooks', (req, res) => {
         .values()
     ];
   };
-  const p = new Path('/surveys/:surveyId/:choice');
+  const p = new Path('/api/surveys/:surveyId/:choice');
   const uniqueEvents = uniqBy(
     req.body
       .map(({ email, url }) => {
@@ -72,7 +72,7 @@ surveyRouter.post('/surveys/webhooks', (req, res) => {
 });
 
 surveyRouter.post(
-  '/surveys',
+  '/api/surveys',
   requireLogin,
   requireCredits,
   async (req, res) => {

@@ -68,17 +68,14 @@ const devConfig = {
     host: '0.0.0.0',
     hot: true,
     proxy: {
-      '/auth/google': 'http://localhost:5000',
-      '/api/*': 'http://localhost:5000'
+      '/auth/google': `http://${process.env.API_HOST}:${process.env.API_PORT}`,
+      '/api/*': `http://${process.env.API_HOST}:${process.env.API_PORT}/v1`,
+      '/socket.io': {
+        target: `http://${process.env.SOCKETIO_HOST}:${process.env.SOCKETIO_PORT}`,
+        ws: true
+      }
     }
   }
 };
 
 export default merge(commonConfig, devConfig);
-
-// customizeArray(a, b, key) {
-//   if (key === 'entry.index') {
-//     return b;
-//   }
-//   return undefined;
-// }

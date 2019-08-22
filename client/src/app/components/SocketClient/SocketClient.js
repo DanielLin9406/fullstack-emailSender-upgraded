@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client';
+// import { baseUrlHostPort } from '@app/modules/host/url';
 
 export default class SocketClient extends Component {
   constructor() {
     super();
     this.state = {
       response: false,
-      endpoint: 'http://localhost:5001'
+      endpoint: '/'
     };
   }
 

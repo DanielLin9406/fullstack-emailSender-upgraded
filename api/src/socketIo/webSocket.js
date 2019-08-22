@@ -1,4 +1,5 @@
 import socketIo from 'socket.io';
+import expressStatusMonitor from 'express-status-monitor';
 
 function EmitEventToClient(socket) {
   socket.emit('FromAPI', '123123123123');
@@ -32,8 +33,14 @@ function bindEventOnIo(io) {
   });
 }
 
-const activateSocketIo = activedServer => {
+const activateSocketIo = (activedServer, app) => {
   const io = initSocketIo(activedServer);
+  app.use(
+    expressStatusMonitor({
+      websocket: io,
+      port: app.get(process.env.SOCKETIO_PORT)
+    })
+  );
   bindEventOnIo(io);
   return activedServer;
 };

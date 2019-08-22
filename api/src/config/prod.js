@@ -7,7 +7,7 @@ const sessionKey = {
   cookieKey: process.env.COOKIE_KEY_PROD
 };
 
-const dbURL = process.env.MONGODB_URI;
+const dbURL = process.env.DATABASE_URL_PROD;
 
 const stripeAPIKeys = {
   publishKey: process.env.STRIPE_PUB_KEY,
@@ -15,7 +15,6 @@ const stripeAPIKeys = {
 };
 
 const sendGridAPIKeys = process.env.SENDGRID_KEY;
-
 const redirectDomain = process.env.REDIRECT_DOMAIN;
 
 module.exports = {

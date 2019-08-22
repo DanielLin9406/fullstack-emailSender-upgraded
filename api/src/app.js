@@ -31,9 +31,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', auth.authAPI);
-app.use('/api', user.userAPI);
-app.use('/api', billing.billingAPI);
-app.use('/api', survey.surveyAPI);
+app.use('/v1', user.userAPI);
+app.use('/v1', billing.billingAPI);
+app.use('/v1', survey.surveyAPI);
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {

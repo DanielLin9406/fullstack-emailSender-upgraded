@@ -3,6 +3,7 @@ import noop from 'lodash/noop';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { oneOfType, func, bool, any } from 'prop-types';
+// import baseUrl from '@app/modules/host/url';
 import styled from 'styled-components';
 import Payments from '@app/components/Payments/Container';
 

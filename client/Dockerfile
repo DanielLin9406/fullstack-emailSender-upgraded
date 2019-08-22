@@ -3,7 +3,7 @@ FROM node:10.16.0-jessie
 LABEL maintainer_email="universetennis@gmail.com"
 LABEL maintainer="daniel"
 
-RUN npm i -g npm@5.6.0
+RUN npm i -g npm@6.9.0
 RUN npm i -g npx
 RUN useradd --user-group --create-home --shell /bin/bash app
 RUN mkdir -p /home/client/node_modules
@@ -15,7 +15,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build:prod
-RUN npm run server:prod
 
 EXPOSE 8080
 CMD ["npm", "run", "server:prod"]

@@ -22,25 +22,39 @@ const paths = {
   webpackVisualizerHtml: 'report/webpack-visualizer.html'
 };
 
-const API_HOST = {
-  production: '',
-  stage: '',
+const SOCKETIO_PORT = {
+  prod: process.env.SOCKETIO_PORT,
+  stage: process.env.SOCKETIO_PORT,
   jsonserver: 'localhost',
-  dev: 'localhost'
+  dev: process.env.SOCKETIO_PORT
+};
+
+const SOCKETIO_HOST = {
+  prod: process.env.SOCKETIO_HOST,
+  stage: process.env.SOCKETIO_HOST,
+  jsonserver: 'localhost',
+  dev: process.env.SOCKETIO_HOST
+};
+
+const API_HOST = {
+  prod: process.env.API_HOST,
+  stage: process.env.API_HOST,
+  jsonserver: 'localhost',
+  dev: process.env.API_HOST
 };
 
 const API_PORT = {
-  production: '',
-  stage: '',
+  prod: process.env.API_PORT,
+  stage: process.env.API_PORT,
   jsonserver: '8090',
-  dev: '5000'
+  dev: process.env.API_PORT
 };
 
 const API_VER = {
-  production: 'v1',
-  stage: 'v1',
+  prod: process.env.API_VER,
+  stage: process.env.API_VER,
   jsonserver: 'v1',
-  dev: 'v1'
+  dev: process.env.API_VER
 };
 
 const pubKey = {
@@ -50,4 +64,12 @@ const pubKey = {
   }
 };
 
-export { paths, pubKey, API_HOST, API_PORT, API_VER };
+export {
+  paths,
+  pubKey,
+  API_HOST,
+  API_PORT,
+  API_VER,
+  SOCKETIO_HOST,
+  SOCKETIO_PORT
+};

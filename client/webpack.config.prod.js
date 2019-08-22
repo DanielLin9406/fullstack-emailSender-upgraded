@@ -1,5 +1,4 @@
 import merge from 'webpack-merge';
-
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -24,6 +23,7 @@ const publicConfig = {
   },
   output: {
     path: paths.buildDir,
+    publicPath: '/',
     filename: 'static/js/[name].[chunkhash].js',
     chunkFilename: 'static/js/[name].[chunkhash].js'
   },
@@ -41,7 +41,7 @@ const publicConfig = {
             options: {
               sourceMap: true,
               modules: {
-                localIdentName: '[local]-[hash:base64:5]'
+                localIdentName: '[local]'
               }
             }
           },

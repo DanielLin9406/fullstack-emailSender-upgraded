@@ -4,29 +4,42 @@ services:
     build:
       dockerfile: docker-dev.dockerfile
       context: ./api
-    image: api
+    container_name: api-email-sender
     volumes:
-      - .:/home/api/
+      - ./api:/home/api/
       - /home/api/node_modules
     env_file:
       - ./api/.env
     environment:
       - NODE_ENV=development
+      - SOCKETIO_PORT=5001
     ports:
       - 5000:5000
+      - 5001:5001
     command: npm run server
+    networks:
+      - email-sender-dev
   client:
     build:
       dockerfile: docker-dev.dockerfile
       context: ./client
-    image: client
+    container_name: client-email-sender
     env_file:
       - ./client/.env
     environment:
       - NODE_ENV=development
+      - CLIENT_PORT=8080
+      - API_HOST=api
+      - API_PORT=5000
+      - SOCKETIO_HOST=api
+      - SOCKETIO_PORT=5001
     volumes:
       - ./client:/home/client/
       - /home/client/node_modules
     ports:
       - 8080:8080
     command: npm run start:dev
+    networks:
+      - email-sender-dev
+networks:
+  email-sender-dev:

@@ -1,5 +1,6 @@
 import authRouter from '../../libs/router/enrichRouter';
 import passport from '../../libs/auth/passport';
+import keys from '../../config/keys';
 
 authRouter.get(
   '/google',
@@ -13,7 +14,7 @@ authRouter.get(
   '/google/callback',
   passport.authenticate('google'),
   (req, res) => {
-    res.redirect('/surveys');
+    res.redirect(`/surveys`);
   }
 );
 

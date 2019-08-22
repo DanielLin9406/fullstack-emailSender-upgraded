@@ -1,17 +1,19 @@
 {
   "name": "dan-email-sender-react-redux-express-mongo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Revised email sender",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run server --prefix api\" \"npm run start:dev --prefix client\"",
+    "build": "npm run build --prefix api && npm run build:prod --prefix client",
+    "prod": "concurrently \"npm run prod --prefix api\" \"npm run server:prod --prefix client\"",
     "dev-webhook": "concurrently \"npm run server --prefix api\" \"npm run start:dev --prefix client\" \"npm run webhook\"",
     "webhook": "./sendgrid_webhook.sh anfoweinf343434"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DanielLin9406/fullstack-emailsender-react-redux-node-mongodb.git"
+    "url": "git+https://github.com/DanielLin9406/fullstack-emailSender-upgraded.git"
   },
   "author": "Daniel Lin",
   "license": "MIT",

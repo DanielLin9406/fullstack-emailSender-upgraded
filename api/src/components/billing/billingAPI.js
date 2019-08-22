@@ -5,7 +5,7 @@ import billingRouter from '../../libs/router/enrichRouter';
 
 const stripe = Stripe(stripeAPIKeys.secretKey);
 
-billingRouter.post('/stripe', requireLogin, async (req, res) => {
+billingRouter.post('/api/stripe', requireLogin, async (req, res) => {
   const charge = await stripe.charges.create({
     amount: 500,
     currency: 'usd',

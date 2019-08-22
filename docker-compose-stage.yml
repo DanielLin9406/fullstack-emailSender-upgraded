@@ -1,0 +1,52 @@
+version: "3"
+services:
+  nginx-stage:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    container_name: nginx-email-sender-stage
+    ports:
+      - "3060:80"
+    networks:
+      - email-sender-prod
+  api-stage:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    container_name: api-email-sender-stage
+    env_file:
+      - ./api/.env
+    environment:
+      - NODE_ENV=production
+      - SOCKETIO_PORT=5001
+    ports:
+      - 5000:5000
+      - 5001:5001
+    command: npm run prod
+    networks:
+      - email-sender-prod
+  client-stage:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    container_name: client-email-sender-stage
+    env_file:
+      - ./client/.env
+    environment:
+      - NODE_ENV=production
+      - NODE_ENV_API=prod
+      - DOCKER=true
+      - CLIENT_HOST=api-stage
+      - CLIENT_PORT=3060
+      - API_HOST=api-stage
+      - API_PORT=3060
+      - SOCKETIO_HOST=api-stage
+      - SOCKETIO_PORT=3060
+    ports:
+      - 8080:8080
+    command: npm run server:prod
+    networks:
+      - email-sender-prod
+networks:
+  email-sender-prod:

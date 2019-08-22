@@ -8,7 +8,7 @@ import connectExpress2GraphQL from './graphql/graphqlExpress';
 const activedServer = http.createServer(
   connectExpress2GraphQL({ app, bodyParser })
 );
-activateSocketIo(activedServer).listen(5001);
+activateSocketIo(activedServer, app).listen(process.env.SOCKETIO_PORT);
 
 // Method:2 Launch apollo server with express
 // server.applyMiddleware({ app, path: '/graphql' });

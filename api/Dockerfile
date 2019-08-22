@@ -3,7 +3,7 @@ FROM node:10.16.0-jessie
 LABEL maintainer_email="universetennis@gmail.com"
 LABEL maintainer="daniel"
 
-RUN npm i -g npm@5.6.0
+RUN npm i -g npm@6.9.0
 RUN useradd --user-group --create-home --shell /bin/bash app
 RUN mkdir -p /home/api/node_modules
 RUN chown -R app:app /home/api/
@@ -15,5 +15,5 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-EXPOSE 5000
+EXPOSE 5000 5001
 CMD ["npm", "run", "prod"]
