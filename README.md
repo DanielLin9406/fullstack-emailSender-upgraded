@@ -21,8 +21,8 @@ Tech perspective:
 
 - A express project in company with graphql+socket.io
 - A express project in company with apollo-server+socket.io
-- Update app.js to a readable component.
-- Update Api service to a rolebased structure.
+- Separate Express 'app' and 'server'.
+- Update api service file structure from technical role to self-contained components.
 - Refractor api service from common.js to ES6 import syntax
 
 ## Prerequisite
@@ -213,9 +213,9 @@ npm run build:prod
 
 ## History
 
-- origin/initial:
-- origin/hooks:
-- origin/rolebased:
-- origin/master:
+- origin/initial: Initial full-stack version with docker.
+- origin/hooks: Modify /client component to function component and implement hooks
+- origin/rolebased: Modify /api file structure from technical role to self-contained components.
+- origin/master: Final full-stack project with dev-ops pipeline.
 
 ## License
