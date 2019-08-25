@@ -78,14 +78,14 @@ This method is easy.
 Open browser and go to http://localhost:3050.
 You can see the dashboard.
 
-### Method 2:
+### Method 2: npm script
 
 If you want to do it with purely npm command, there are more additional setup:
 
 1. Install Dependence of services
 
 ```bash
-# ./
+# ./ @project root
 # ./client
 # ./api
 
@@ -106,6 +106,7 @@ Open browser and go to http://localhost:8080.
 ### More Slient Start Script
 
 ```bash
+# ./client @project root
 # with JSON Mock server (only get data is available )
 npm run start:jsonserver
 
@@ -157,7 +158,7 @@ Open browser and go to http://localhost:8080.
 ### More Client Build Script
 
 ```bash
-# ./services/web
+# ./client
 # with other localhost API server in different port
 npm run build:dev
 
@@ -196,7 +197,6 @@ npm run build:prod
 - GraphQL by express-graphql or apollo-server
 - Mongoose
 - MongoDB Altas
-- Redis for DB caching
 - Sensitive data handler: dotenv
 
 ### Dev-Ops
@@ -204,7 +204,6 @@ npm run build:prod
 - Docker
 - Docker-compose
 - Nginx as reverse-proxy
-- Nginx as static file server in production
 - Bash 5 for development
 
 ### Cloud - Heroku with Docker
