@@ -1,4 +1,4 @@
-const mongoose = require('../../../libs/db/mongoose').default;
+const mongoose = require('../../libs/db/mongoose').default;
 const { googleId } = require('../const');
 
 const User = mongoose.model('User');

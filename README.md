@@ -169,6 +169,14 @@ npm run build:stage
 npm run build:prod
 ```
 
+## Run Test
+
+Test GraphQL Server
+
+```bash
+npm run test
+```
+
 ## TechStacks
 
 ### Client
@@ -192,9 +200,10 @@ npm run build:prod
 - Babel node for compiling ES6 syntax
 - Express.js
 - Restful API
-- Mocha+Chi for unit test
 - WebSocket by Socket.io
 - GraphQL by express-graphql or apollo-server
+- Mocha+Chi for unit test to express-graphql
+- Mocha+Chi for unit test to RESTFul API
 - Mongoose
 - MongoDB Altas
 - Sensitive data handler: dotenv

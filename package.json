@@ -4,7 +4,7 @@
   "description": "Revised email sender",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test --prefix api",
     "dev": "concurrently \"npm run server --prefix api\" \"npm run start:dev --prefix client\"",
     "build": "npm run build --prefix api && npm run build:prod --prefix client",
     "prod": "concurrently \"npm run prod --prefix api\" \"npm run server:prod --prefix client\"",
